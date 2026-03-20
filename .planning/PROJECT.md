@@ -12,16 +12,15 @@ The agent-powered shortlist: automatically surface qualifying companies so users
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Agent fetches 10-Q/10-K filings, earnings summaries, key financial ratios, and news for each company — Validated in Phase 2: Data Agent & Scheduler
+- [x] Coverage of US (NYSE/NASDAQ), Germany (XETRA), China (A-shares/HK), and EU markets — Validated in Phase 2: Data Agent & Scheduler
+- [x] Scheduled + on-demand data refresh — Validated in Phase 2: Data Agent & Scheduler
 
 ### Active
 
-- [ ] Agent fetches 10-Q/10-K filings, earnings summaries, key financial ratios, and news for each company
 - [ ] Preset growth and value investing screening criteria with configurable thresholds
-- [ ] Coverage of US (NYSE/NASDAQ), Germany (XETRA), China (A-shares/HK), and EU markets
 - [ ] Dashboard with company overview cards and drill-down detail pages
 - [ ] Structured investment thesis template (bull/bear case, target price, conviction) + free-form notes per company
-- [ ] Scheduled + on-demand data refresh
 - [ ] Google OAuth login with individual user accounts
 - [ ] Responsive web app + mobile app (React Native / Expo)
 
@@ -51,11 +50,13 @@ The agent-powered shortlist: automatically surface qualifying companies so users
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Supabase for auth + DB | Google OAuth built-in, PostgreSQL, free tier generous for small team | — Pending |
-| FastAPI Python backend | Best ecosystem for financial data agents (yfinance, pandas, APScheduler) | — Pending |
+| Supabase for auth + DB | Google OAuth built-in, PostgreSQL, free tier generous for small team | Confirmed Phase 1 |
+| FastAPI Python backend | Best ecosystem for financial data agents (yfinance, pandas, APScheduler) | Confirmed Phase 2 |
 | React Native + Expo for mobile | Share business logic with Next.js web app, single codebase | — Pending |
-| Free APIs only | User constraint — avoids ongoing data costs | — Pending |
-| yfinance for global coverage | Covers US, .DE, HK/China, EU tickers with single library | — Pending |
+| Free APIs only | User constraint — avoids ongoing data costs | Confirmed Phase 2 |
+| yfinance for global coverage | Covers US, .DE, HK/China, EU tickers with single library | Confirmed Phase 2 |
+| APScheduler for scheduling | In-process scheduler, no external queue needed at small team scale | Confirmed Phase 2 |
+| Seed-market lookup for EDGAR guard | Dot-suffix heuristic insufficient for HK cross-listed tickers (BIDU) — seed JSON used as source of truth | Confirmed Phase 2 |
 
 ## Evolution
 
@@ -69,4 +70,4 @@ This document evolves at phase transitions and milestone boundaries.
 5. "What This Is" still accurate? → Update if drifted
 
 ---
-*Last updated: 2026-03-20 after initialization*
+*Last updated: 2026-03-20 — Phase 2 complete (Data Agent & Scheduler)*
