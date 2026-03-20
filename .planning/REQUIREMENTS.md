@@ -13,13 +13,13 @@
 
 ### Data Agent
 
-- [ ] **AGENT-01**: Agent fetches 10-Q and 10-K filings from SEC EDGAR for US companies
-- [ ] **AGENT-02**: Agent fetches earnings summaries (EPS, revenue, guidance) via yfinance
-- [ ] **AGENT-03**: Agent computes key financial ratios (P/E, P/B, ROE, EV/EBITDA, debt-to-equity)
-- [ ] **AGENT-04**: Agent fetches recent news and analyst ratings per company
-- [ ] **AGENT-05**: Agent covers US (NYSE/NASDAQ), Germany (XETRA .DE), China (HK/A-share), and EU markets
-- [ ] **AGENT-06**: Agent runs on a configurable schedule (daily default) and supports on-demand refresh
-- [ ] **AGENT-07**: Agent logs fetch status and errors per company per run
+- [x] **AGENT-01**: Agent fetches 10-Q and 10-K filings from SEC EDGAR for US companies
+- [x] **AGENT-02**: Agent fetches earnings summaries (EPS, revenue, guidance) via yfinance
+- [x] **AGENT-03**: Agent computes key financial ratios (P/E, P/B, ROE, EV/EBITDA, debt-to-equity)
+- [x] **AGENT-04**: Agent fetches recent news and analyst ratings per company
+- [x] **AGENT-05**: Agent covers US (NYSE/NASDAQ), Germany (XETRA .DE), China (HK/A-share), and EU markets
+- [x] **AGENT-06**: Agent runs on a configurable schedule (daily default) and supports on-demand refresh
+- [x] **AGENT-07**: Agent logs fetch status and errors per company per run
 
 ### Screening Engine
 
@@ -94,13 +94,13 @@
 | AUTH-01 | Phase 1 | Pending |
 | AUTH-02 | Phase 1 | Pending |
 | AUTH-03 | Phase 1 | Pending |
-| AGENT-01 | Phase 2 | Pending |
-| AGENT-02 | Phase 2 | Pending |
-| AGENT-03 | Phase 2 | Pending |
-| AGENT-04 | Phase 2 | Pending |
-| AGENT-05 | Phase 2 | Pending |
-| AGENT-06 | Phase 2 | Pending |
-| AGENT-07 | Phase 2 | Pending |
+| AGENT-01 | Phase 2 | Complete |
+| AGENT-02 | Phase 2 | Complete |
+| AGENT-03 | Phase 2 | Complete |
+| AGENT-04 | Phase 2 | Complete |
+| AGENT-05 | Phase 2 | Complete |
+| AGENT-06 | Phase 2 | Complete |
+| AGENT-07 | Phase 2 | Complete |
 | SCREEN-01 | Phase 3 | Pending |
 | SCREEN-02 | Phase 3 | Pending |
 | SCREEN-03 | Phase 3 | Pending |
