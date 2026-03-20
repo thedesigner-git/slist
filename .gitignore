@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.local
+.env*.local
+__pycache__/
+*.pyc
+.venv/
+dist/
+.next/
+.expo/
+supabase/.branches/
+supabase/.temp/
+*.egg-info/
+.pytest_cache/
