@@ -4,7 +4,8 @@ from .ratios import Ratio
 from .growth import GrowthMetric
 from .signals import Signal
 from .news import News
+from .filing import Filing
 from .agent_run import AgentRun, AgentRunResult
 
 __all__ = ["Company", "Financials", "BalanceSheet", "CashFlow",
-           "Ratio", "GrowthMetric", "Signal", "News", "AgentRun", "AgentRunResult"]
+           "Ratio", "GrowthMetric", "Signal", "News", "Filing", "AgentRun", "AgentRunResult"]
