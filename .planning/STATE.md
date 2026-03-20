@@ -4,12 +4,12 @@ milestone: v1.0
 milestone_name: milestone
 current_plan: 02-01 complete (1 of 5 plans in Phase 02)
 status: executing
-last_updated: "2026-03-20T20:41:46.568Z"
+last_updated: "2026-03-20T20:59:32.085Z"
 progress:
   total_phases: 7
   completed_phases: 2
-  total_plans: 8
-  completed_plans: 8
+  total_plans: 10
+  completed_plans: 10
 ---
 
 # State: InvestIQ
@@ -66,6 +66,8 @@ Ideas captured during planning that are out of scope for v1 but worth revisiting
 - [Phase 02-data-agent-scheduler]: upsert_financials splits quarter dict into three separate table upserts (Financials, BalanceSheet, CashFlow) in one commit batch
 - [Phase 02-data-agent-scheduler]: AgentRunResult.company_id nullable (SET NULL FK) to handle pre-upsert failures without DB constraint violation
 - [Phase 02-data-agent-scheduler]: APScheduler BackgroundScheduler (not AsyncIOScheduler) — agent pipeline is synchronous SQLAlchemy; run_all triggered both by scheduler and FastAPI BackgroundTasks
+- [Phase 02-data-agent-scheduler]: is_us_ticker() now uses seed_companies.json market field as primary check, dot-suffix heuristic as fallback for unknown tickers; BIDU correctly classified as non-US
+- [Phase 02-data-agent-scheduler]: Migration drops and re-adds FK constraint (not ALTER CONSTRAINT) to change ON DELETE action from CASCADE to SET NULL for agent_run_results.company_id
 
 ## Performance Metrics
 
@@ -76,6 +78,8 @@ Ideas captured during planning that are out of scope for v1 but worth revisiting
 | Phase 02-data-agent-scheduler P02-02 | 2min | 2 tasks | 3 files |
 | Phase 02-data-agent-scheduler P02-04 | 2min | 2 tasks | 4 files |
 | Phase 02-data-agent-scheduler P02-05 | 6min | 2 tasks | 4 files |
+| Phase 02-data-agent-scheduler P02-07 | 5min | 1 tasks | 1 files |
+| Phase 02-data-agent-scheduler P02-06 | 3min | 1 tasks | 1 files |
 
 ## Notes
 

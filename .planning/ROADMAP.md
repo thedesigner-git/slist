@@ -7,7 +7,7 @@ Seven phases taking InvestIQ from a blank repo to a production-deployed investme
 ## Phases
 
 - [ ] **Phase 1: Foundation & Auth** - Project skeleton, Supabase, Google OAuth, local dev environment
-- [ ] **Phase 2: Data Agent & Scheduler** - Agent fetches financials, filings, and news; APScheduler; on-demand refresh
+- [x] **Phase 2: Data Agent & Scheduler** - Agent fetches financials, filings, and news; APScheduler; on-demand refresh (completed 2026-03-20)
 - [ ] **Phase 3: Screening Engine** - Growth/value criteria presets, configurable thresholds, shortlist scoring
 - [ ] **Phase 4: Dashboard & Company Detail** - Overview cards, filters, company detail page, metrics and news
 - [ ] **Phase 5: Notes & Research Workspace** - Structured thesis template, free-form rich text notes per user per company
@@ -132,7 +132,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Auth | 0/3 | Not started | - |
-| 2. Data Agent & Scheduler | 4/5 | In Progress|  |
+| 2. Data Agent & Scheduler | 7/7 | Complete   | 2026-03-20 |
 | 3. Screening Engine | 0/3 | Not started | - |
 | 4. Dashboard & Company Detail | 0/3 | Not started | - |
 | 5. Notes & Research Workspace | 0/3 | Not started | - |
