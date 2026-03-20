@@ -50,7 +50,6 @@ Declared values (multiples of 4):
 
 Exceptions:
 - Touch targets for Watch bookmark icon button: minimum 44px x 44px (accessibility requirement, exceeds 8-point grid intentionally)
-- Score badge pill: 6px vertical / 12px horizontal (3px / 6px — smallest allowed exception for inline badge readability)
 
 ---
 
@@ -59,17 +58,17 @@ Exceptions:
 | Role | Size | Weight | Line Height |
 |------|------|--------|-------------|
 | Body | 14px | 400 (regular) | 1.5 |
-| Label | 12px | 500 (medium) | 1.4 |
+| Label | 12px | 400 (regular) | 1.4 |
 | Heading | 20px | 600 (semibold) | 1.2 |
 | Display | 28px | 700 (bold) | 1.1 |
 
 **Usage mapping:**
 - Body (14px/400): Criterion description text, drawer helper text, threshold input labels
-- Label (12px/500): Preset section headers ("GROWTH CRITERIA", "VALUE CRITERIA"), score badge text, criterion threshold unit labels (e.g., "%", "x")
+- Label (12px/400): Preset section headers ("GROWTH CRITERIA", "VALUE CRITERIA"), score badge text, criterion threshold unit labels (e.g., "%", "x") — differentiated from body via `uppercase` + `tracking-widest`, not weight
 - Heading (20px/600): Drawer title ("Screening Criteria"), shortlist section title
 - Display (28px/700): Not used in Phase 3 (reserved for Phase 4 dashboard hero stats)
 
-**Weight constraint:** Only 2 weights in Phase 3 — regular (400) and semibold (600). Medium (500) used exclusively for label-role text (12px caps labels). Bold (700) deferred to Phase 4.
+**Weight constraint:** 2 weights in Phase 3: 400 (regular) and 600 (semibold) — medium (500) and bold (700) deferred to Phase 4. Labels at 12px use weight 400 and rely on uppercase + letter-spacing for visual differentiation instead of weight.
 
 ---
 
@@ -119,12 +118,12 @@ SheetHeader
 SheetContent (scrollable, gap-2xl between preset sections)
   [Section: Growth Criteria]
     Row: preset-level toggle
-      Label: "GROWTH"                   (Label / 12px / zinc-400 / uppercase / tracking-widest)
+      Label: "GROWTH"                   (Label / 12px / 400 / zinc-400 / uppercase / tracking-widest)
       Switch (Radix) — enabled = violet accent
     [Criterion rows, only visible when preset enabled]
       CriterionRow:
         Left: criterion name (14px/400/white) + description (12px/400/zinc-400)
-        Right: ThresholdInput (number input, 64px wide) + unit label (12px/zinc-400) + individual Switch
+        Right: ThresholdInput (number input, 64px wide) + unit label (12px/400/zinc-400) + individual Switch
   [Section: Value Criteria]
     Same structure as Growth
 
@@ -144,7 +143,8 @@ SheetFooter
 **Displayed per company on the shortlist row/card.**
 
 Structure: Pill badge, inline.
-- Text: "86%" or "6/7" — Label size (12px/500)
+- Text: "86%" or "6/7" — Label size (12px/400/uppercase)
+- Padding: 4px vertical / 12px horizontal
 - Shortlisted (score >= threshold): bg-violet-500/20 (10% violet), text-violet-300, violet-500/30 border
 - Not shortlisted: bg-zinc-700, text-zinc-400, no border
 
@@ -152,9 +152,9 @@ Structure: Pill badge, inline.
 
 Two independent badges, shown side-by-side when both apply.
 
-- Growth: bg-emerald-500/15, text-emerald-400, 12px/500
-- Value: bg-amber-500/15, text-amber-400, 12px/500
-- Shape: rounded-full, 6px vertical / 10px horizontal padding
+- Growth: bg-emerald-500/15, text-emerald-400, 12px/400/uppercase
+- Value: bg-amber-500/15, text-amber-400, 12px/400/uppercase
+- Shape: rounded-full, 4px vertical / 8px horizontal padding
 
 ### 4. Watch Bookmark Toggle
 
@@ -205,6 +205,8 @@ When the background scoring job is running after "Apply Changes":
 | Watch removal confirmation body | "This company will leave the shortlist — its score is below your threshold." |
 | Watch removal confirm action | "Remove Watch" |
 | Watch removal cancel action | "Keep Watch" |
+| Watch button tooltip (add) | "Add to Watch" |
+| Watch button tooltip (remove) | "Remove Watch" |
 | Threshold validation error | "Must be a positive number" |
 | Preset disabled state label | "Preset off — criteria not applied" |
 | Score badge tooltip (shortlisted) | "{n} of {total} active criteria passed" |
@@ -232,6 +234,7 @@ No third-party registries declared. Only shadcn official components used.
 - All Switch components must have `aria-label` describing the criterion (e.g., "Toggle Revenue Growth criterion")
 - Score badge must have `title` or `aria-label` with full text ("86% — 6 of 7 criteria passed")
 - Watch bookmark button must have `aria-label="Add to Watch"` / `aria-label="Remove Watch"` toggling with state
+- Watch bookmark button must also expose a visible tooltip matching aria-label copy (see Copywriting Contract)
 - Drawer must trap focus when open (Radix Sheet handles this natively)
 - Threshold number inputs: `type="number"`, `min="0"`, `aria-label` with criterion name
 - Color contrast: all text on zinc-800/900 backgrounds meets WCAG AA (zinc-400 on zinc-800 = 4.6:1)
