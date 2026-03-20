@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from agent.runner import run_all
 from routers import agent as agent_router
-from routers import users
+from routers import criteria, users
 
 scheduler = BackgroundScheduler(timezone="America/New_York")
 
@@ -37,6 +37,7 @@ app.add_middleware(
 
 app.include_router(users.router)
 app.include_router(agent_router.router)
+app.include_router(criteria.router)
 
 
 @app.get("/health")

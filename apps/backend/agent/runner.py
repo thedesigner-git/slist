@@ -3,20 +3,26 @@ import logging
 from datetime import datetime, timezone
 from pathlib import Path
 
+from agent.edgar import get_filings
+from agent.fetcher import fetch_company
+from agent.growth import compute_growth
+from agent.news import save_news
+from agent.parser import parse_financials, parse_info, parse_news
+from agent.ratios import compute_ratios
+from agent.signals import generate_signals
+from agent.store import (
+    upsert_company,
+    upsert_filings,
+    upsert_financials,
+    upsert_growth,
+    upsert_ratios,
+    upsert_signals,
+)
+from agent.scoring import score_all_companies
 from db import Session
 from models.agent_run import AgentRun, AgentRunResult
 from models.company import Company
-from agent.fetcher import fetch_company
-from agent.parser import parse_financials, parse_info, parse_news
-from agent.edgar import get_filings
-from agent.ratios import compute_ratios
-from agent.growth import compute_growth
-from agent.signals import generate_signals
-from agent.store import (
-    upsert_company, upsert_financials, upsert_ratios,
-    upsert_growth, upsert_signals, upsert_filings,
-)
-from agent.news import save_news
+from models.screening import UserCriteriaSettings
 
 logger = logging.getLogger(__name__)
 SEED_PATH = Path(__file__).parent.parent / "data" / "seed_companies.json"
@@ -139,6 +145,15 @@ def run_all():
     run.companies_success = success_count
     run.companies_failed = failed_count
     db.commit()
+
+    # Score all companies for each user with criteria settings (per D-12)
+    user_settings = db.query(UserCriteriaSettings).all()
+    for settings in user_settings:
+        try:
+            score_all_companies(db, settings.user_id)
+        except Exception as e:
+            logger.error(f"Scoring failed for user {settings.user_id}: {e}")
+
     db.close()
     logger.info(f"Agent run complete: {success_count} success, {failed_count} failed")
 
@@ -148,5 +163,13 @@ def run_single(ticker: str, market: str):
     db = Session()
     try:
         run_company(db, {"ticker": ticker, "market": market}, run_id=0)
+
+        # Score all companies for each user with criteria settings (per D-12)
+        user_settings = db.query(UserCriteriaSettings).all()
+        for settings in user_settings:
+            try:
+                score_all_companies(db, settings.user_id)
+            except Exception as e:
+                logger.error(f"Scoring failed for user {settings.user_id}: {e}")
     finally:
         db.close()
