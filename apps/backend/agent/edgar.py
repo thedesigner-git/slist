@@ -1,11 +1,26 @@
+import json
 import logging
 from functools import lru_cache
+from pathlib import Path
 
 import requests
 
 logger = logging.getLogger(__name__)
 HEADERS = {"User-Agent": "InvestIQ research@investiq.local"}
 TICKER_CIK_URL = "https://www.sec.gov/files/company_tickers.json"
+_SEED_PATH = Path(__file__).parent.parent / "data" / "seed_companies.json"
+
+
+@lru_cache(maxsize=1)
+def _load_seed_markets() -> dict[str, str]:
+    """Load and cache ticker->market mapping from seed_companies.json."""
+    try:
+        with open(_SEED_PATH) as f:
+            companies = json.load(f)
+        return {c["ticker"]: c["market"] for c in companies}
+    except Exception as e:
+        logger.error(f"Failed to load seed markets: {e}")
+        return {}
 
 
 @lru_cache(maxsize=1)
@@ -21,7 +36,10 @@ def _load_cik_map() -> dict[str, str]:
 
 
 def is_us_ticker(ticker: str) -> bool:
-    """Only fetch EDGAR data for US tickers (no dot suffix)."""
+    """Check if ticker is US-market. Uses seed data first, falls back to dot-suffix heuristic."""
+    seed_markets = _load_seed_markets()
+    if ticker in seed_markets:
+        return seed_markets[ticker] == "US"
     return "." not in ticker
 
 
