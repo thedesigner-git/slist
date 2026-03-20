@@ -21,7 +21,7 @@ class AgentRunResult(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     run_id: Mapped[int] = mapped_column(Integer, ForeignKey("agent_runs.id", ondelete="CASCADE"), nullable=False)
-    company_id: Mapped[int] = mapped_column(Integer, ForeignKey("companies.id", ondelete="CASCADE"), nullable=False)
+    company_id: Mapped[int | None] = mapped_column(Integer, ForeignKey("companies.id", ondelete="SET NULL"), nullable=True)
     status: Mapped[str] = mapped_column(String(20), nullable=False)  # success, failed, skipped
     error_message: Mapped[str] = mapped_column(String(1000), nullable=True)
     fetched_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
