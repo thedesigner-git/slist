@@ -4,12 +4,12 @@ milestone: v1.0
 milestone_name: milestone
 current_plan: 1
 status: executing
-last_updated: "2026-03-20T23:36:22.333Z"
+last_updated: "2026-03-20T23:42:26.701Z"
 progress:
   total_phases: 7
   completed_phases: 2
   total_plans: 13
-  completed_plans: 11
+  completed_plans: 12
 ---
 
 # State: InvestIQ
@@ -71,6 +71,9 @@ Ideas captured during planning that are out of scope for v1 but worth revisiting
 - [Phase 03-screening-engine]: Null metrics count as failed criterion per D-04 — no data skipping in scoring
 - [Phase 03-screening-engine]: score_company is a pure function (no DB) — enables fast unit testing
 - [Phase 03-screening-engine]: TTM = average of non-null values from last 4 quarters; fewer quarters still scored per D-11
+- [Phase 03-screening-engine]: BackgroundTasks (not APScheduler) used for on-demand per-user recalculation triggered by PUT /api/criteria/settings
+- [Phase 03-screening-engine]: Module-level _recalc_in_progress dict tracks per-user background scoring state for status endpoint
+- [Phase 03-screening-engine]: Watch toggle without existing score row creates ShortlistScore immediately with score=0 and is_shortlisted=True
 
 ## Performance Metrics
 
@@ -84,6 +87,7 @@ Ideas captured during planning that are out of scope for v1 but worth revisiting
 | Phase 02-data-agent-scheduler P02-07 | 5min | 1 tasks | 1 files |
 | Phase 02-data-agent-scheduler P02-06 | 3min | 1 tasks | 1 files |
 | Phase 03-screening-engine P03-01 | 4min | 2 tasks | 5 files |
+| Phase 03-screening-engine P03-02 | 3min | 2 tasks | 3 files |
 
 ## Notes
 

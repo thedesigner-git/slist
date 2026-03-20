@@ -63,7 +63,7 @@ Plans:
 
 Plans:
 - [x] 03-01-PLAN.md — Screening models (ShortlistScore, UserCriteriaSettings) and TTM scoring engine
-- [ ] 03-02-PLAN.md — Criteria API router, Watch toggle, scoring integration into agent runner
+- [x] 03-02-PLAN.md — Criteria API router, Watch toggle, scoring integration into agent runner
 - [ ] 03-03-PLAN.md — Frontend criteria drawer, shortlist table, score/label badges, Watch button (shadcn)
 
 ### Phase 4: Dashboard & Company Detail
