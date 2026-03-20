@@ -48,7 +48,7 @@ Plans:
 - [x] 02-02: yfinance integration for US, Germany (.DE), China (HK), and EU tickers
 - [x] 02-03: SEC EDGAR XBRL API integration for 10-Q/10-K filings
 - [x] 02-04: Earnings summary, financial ratio computation, news fetcher
-- [ ] 02-05: APScheduler setup, on-demand refresh endpoint, error logging
+- [x] 02-05: APScheduler setup, on-demand refresh endpoint, error logging
 
 ### Phase 3: Screening Engine
 **Goal**: Automated shortlisting of companies based on configurable growth and value investing criteria.
