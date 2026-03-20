@@ -47,7 +47,7 @@ Plans:
 - [x] 02-01: Database schema (companies, financials, ratios, filings, news, agent_runs)
 - [x] 02-02: yfinance integration for US, Germany (.DE), China (HK), and EU tickers
 - [x] 02-03: SEC EDGAR XBRL API integration for 10-Q/10-K filings
-- [ ] 02-04: Earnings summary, financial ratio computation, news fetcher
+- [x] 02-04: Earnings summary, financial ratio computation, news fetcher
 - [ ] 02-05: APScheduler setup, on-demand refresh endpoint, error logging
 
 ### Phase 3: Screening Engine
@@ -132,7 +132,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Auth | 0/3 | Not started | - |
-| 2. Data Agent & Scheduler | 3/5 | In Progress|  |
+| 2. Data Agent & Scheduler | 4/5 | In Progress|  |
 | 3. Screening Engine | 0/3 | Not started | - |
 | 4. Dashboard & Company Detail | 0/3 | Not started | - |
 | 5. Notes & Research Workspace | 0/3 | Not started | - |

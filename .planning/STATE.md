@@ -4,12 +4,12 @@ milestone: v1.0
 milestone_name: milestone
 current_plan: 02-01 complete (1 of 5 plans in Phase 02)
 status: executing
-last_updated: "2026-03-20T20:32:15.202Z"
+last_updated: "2026-03-20T20:36:00.272Z"
 progress:
   total_phases: 7
   completed_phases: 1
   total_plans: 8
-  completed_plans: 6
+  completed_plans: 7
 ---
 
 # State: InvestIQ
@@ -63,6 +63,7 @@ Ideas captured during planning that are out of scope for v1 but worth revisiting
 - [Phase 02-data-agent-scheduler]: FetchResult dataclass (not dict) for fetch output — typed success/error fields for downstream use
 - [Phase 02-data-agent-scheduler]: parse_financials returns list[dict] per quarter with keys matching DB column names directly
 - [Phase 02-data-agent-scheduler]: Agent fetch+parse separation: fetcher returns raw yfinance objects, parser converts to DB-ready dicts
+- [Phase 02-data-agent-scheduler]: upsert_financials splits quarter dict into three separate table upserts (Financials, BalanceSheet, CashFlow) in one commit batch
 
 ## Performance Metrics
 
@@ -71,6 +72,7 @@ Ideas captured during planning that are out of scope for v1 but worth revisiting
 | 02-data-agent-scheduler | 02-01 | 4min | 2 | 12 |
 | Phase 02-data-agent-scheduler P02-03 | 4min | 2 tasks | 6 files |
 | Phase 02-data-agent-scheduler P02-02 | 2min | 2 tasks | 3 files |
+| Phase 02-data-agent-scheduler P02-04 | 2min | 2 tasks | 4 files |
 
 ## Notes
 
