@@ -15,10 +15,8 @@ def generate_signals(period: str, growth: dict, ratios: dict, balance: dict) -> 
         })
 
     rev_growth = growth.get("revenue_growth_yoy")
-    eps_growth = growth.get("eps_growth_yoy")
     gross_margin = growth.get("gross_margin")
     fcf_margin = growth.get("fcf_margin")
-    de_ratio = ratios.get("debt_to_equity")
 
     # Red signals
     if rev_growth is not None and rev_growth < 0:
