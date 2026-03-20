@@ -62,7 +62,7 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Screening models (ShortlistScore, UserCriteriaSettings) and TTM scoring engine
+- [x] 03-01-PLAN.md — Screening models (ShortlistScore, UserCriteriaSettings) and TTM scoring engine
 - [ ] 03-02-PLAN.md — Criteria API router, Watch toggle, scoring integration into agent runner
 - [ ] 03-03-PLAN.md — Frontend criteria drawer, shortlist table, score/label badges, Watch button (shadcn)
 
@@ -133,7 +133,7 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation & Auth | 0/3 | Not started | - |
 | 2. Data Agent & Scheduler | 7/7 | Complete   | 2026-03-20 |
-| 3. Screening Engine | 0/3 | Not started | - |
+| 3. Screening Engine | 1/3 | In Progress|  |
 | 4. Dashboard & Company Detail | 0/3 | Not started | - |
 | 5. Notes & Research Workspace | 0/3 | Not started | - |
 | 6. Mobile App | 0/3 | Not started | - |

@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: Not started
+current_plan: 1
 status: executing
-last_updated: "2026-03-20T21:05:41.040Z"
+last_updated: "2026-03-20T23:36:22.333Z"
 progress:
   total_phases: 7
   completed_phases: 2
-  total_plans: 10
-  completed_plans: 10
+  total_plans: 13
+  completed_plans: 11
 ---
 
 # State: InvestIQ
@@ -19,14 +19,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-20)
 
 **Core value:** Agent-powered shortlist — automatically surface qualifying companies so users spend time on decisions, not data gathering.
-**Current focus:** Phase 02 — data-agent-scheduler
+**Current focus:** Phase 03 — screening-engine
 
 ## Current Phase
 
 **Phase 2 — Data Agent & Scheduler**
 Status: Executing Phase 02
 Started: 2026-03-20
-Current Plan: Not started
+Current Plan: 1
 
 ## Phase History
 
@@ -68,6 +68,9 @@ Ideas captured during planning that are out of scope for v1 but worth revisiting
 - [Phase 02-data-agent-scheduler]: APScheduler BackgroundScheduler (not AsyncIOScheduler) — agent pipeline is synchronous SQLAlchemy; run_all triggered both by scheduler and FastAPI BackgroundTasks
 - [Phase 02-data-agent-scheduler]: is_us_ticker() now uses seed_companies.json market field as primary check, dot-suffix heuristic as fallback for unknown tickers; BIDU correctly classified as non-US
 - [Phase 02-data-agent-scheduler]: Migration drops and re-adds FK constraint (not ALTER CONSTRAINT) to change ON DELETE action from CASCADE to SET NULL for agent_run_results.company_id
+- [Phase 03-screening-engine]: Null metrics count as failed criterion per D-04 — no data skipping in scoring
+- [Phase 03-screening-engine]: score_company is a pure function (no DB) — enables fast unit testing
+- [Phase 03-screening-engine]: TTM = average of non-null values from last 4 quarters; fewer quarters still scored per D-11
 
 ## Performance Metrics
 
@@ -80,6 +83,7 @@ Ideas captured during planning that are out of scope for v1 but worth revisiting
 | Phase 02-data-agent-scheduler P02-05 | 6min | 2 tasks | 4 files |
 | Phase 02-data-agent-scheduler P02-07 | 5min | 1 tasks | 1 files |
 | Phase 02-data-agent-scheduler P02-06 | 3min | 1 tasks | 1 files |
+| Phase 03-screening-engine P03-01 | 4min | 2 tasks | 5 files |
 
 ## Notes
 

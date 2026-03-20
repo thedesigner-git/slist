@@ -23,10 +23,10 @@
 
 ### Screening Engine
 
-- [ ] **SCREEN-01**: Preset growth investing criteria (e.g., revenue growth >15%, EPS growth >10%, ROE >15%)
-- [ ] **SCREEN-02**: Preset value investing criteria (e.g., P/E < market average, P/B < 2, positive FCF)
+- [x] **SCREEN-01**: Preset growth investing criteria (e.g., revenue growth >15%, EPS growth >10%, ROE >15%)
+- [x] **SCREEN-02**: Preset value investing criteria (e.g., P/E < market average, P/B < 2, positive FCF)
 - [ ] **SCREEN-03**: Each criterion threshold is configurable by the user in the app UI
-- [ ] **SCREEN-04**: Companies are automatically scored and shortlisted when they meet active criteria
+- [x] **SCREEN-04**: Companies are automatically scored and shortlisted when they meet active criteria
 - [ ] **SCREEN-05**: User can tag a company as Growth, Value, or Watch (manual override)
 
 ### Dashboard
@@ -101,10 +101,10 @@
 | AGENT-05 | Phase 2 | Complete |
 | AGENT-06 | Phase 2 | Complete |
 | AGENT-07 | Phase 2 | Complete |
-| SCREEN-01 | Phase 3 | Pending |
-| SCREEN-02 | Phase 3 | Pending |
+| SCREEN-01 | Phase 3 | Complete |
+| SCREEN-02 | Phase 3 | Complete |
 | SCREEN-03 | Phase 3 | Pending |
-| SCREEN-04 | Phase 3 | Pending |
+| SCREEN-04 | Phase 3 | Complete |
 | SCREEN-05 | Phase 3 | Pending |
 | DASH-01 | Phase 4 | Pending |
 | DASH-02 | Phase 4 | Pending |
