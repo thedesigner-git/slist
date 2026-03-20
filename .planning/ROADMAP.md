@@ -59,12 +59,12 @@ Plans:
   2. User can adjust a threshold in settings and shortlist updates
   3. Manual Growth / Value / Watch tag overrides automatic screening
   4. Both growth and value preset criteria are independently togglable
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: Preset criteria definitions (growth and value rules) and scoring engine
-- [ ] 03-02: Criteria configuration UI (threshold sliders/inputs in settings)
-- [ ] 03-03: Shortlist model, scoring pipeline, manual override tagging
+- [ ] 03-01-PLAN.md — Screening models (ShortlistScore, UserCriteriaSettings) and TTM scoring engine
+- [ ] 03-02-PLAN.md — Criteria API router, Watch toggle, scoring integration into agent runner
+- [ ] 03-03-PLAN.md — Frontend criteria drawer, shortlist table, score/label badges, Watch button (shadcn)
 
 ### Phase 4: Dashboard & Company Detail
 **Goal**: Full UI for browsing the shortlist and drilling into company data.
