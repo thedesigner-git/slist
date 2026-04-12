@@ -30,21 +30,24 @@ for _url in os.environ.get("PRODUCTION_URL", "").split(","):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Safe migration: add per-preset criteria count columns if not present
-    with engine.connect() as conn:
-        conn.execute(text(
-            "ALTER TABLE shortlist_scores "
-            "ADD COLUMN IF NOT EXISTS growth_criteria_passed INTEGER, "
-            "ADD COLUMN IF NOT EXISTS value_criteria_passed INTEGER"
-        ))
-        # Add company profile columns for description, location, employees, founded
-        conn.execute(text(
-            "ALTER TABLE companies "
-            "ADD COLUMN IF NOT EXISTS description TEXT, "
-            "ADD COLUMN IF NOT EXISTS location VARCHAR(200), "
-            "ADD COLUMN IF NOT EXISTS employees INTEGER, "
-            "ADD COLUMN IF NOT EXISTS founded VARCHAR(10)"
-        ))
-        conn.commit()
+    try:
+        with engine.connect() as conn:
+            conn.execute(text(
+                "ALTER TABLE shortlist_scores "
+                "ADD COLUMN IF NOT EXISTS growth_criteria_passed INTEGER, "
+                "ADD COLUMN IF NOT EXISTS value_criteria_passed INTEGER"
+            ))
+            # Add company profile columns for description, location, employees, founded
+            conn.execute(text(
+                "ALTER TABLE companies "
+                "ADD COLUMN IF NOT EXISTS description TEXT, "
+                "ADD COLUMN IF NOT EXISTS location VARCHAR(200), "
+                "ADD COLUMN IF NOT EXISTS employees INTEGER, "
+                "ADD COLUMN IF NOT EXISTS founded VARCHAR(10)"
+            ))
+            conn.commit()
+    except Exception as e:
+        print(f"WARNING: Startup migration skipped — DB not reachable: {e}")
 
     scheduler.add_job(
         run_all,
