@@ -37,6 +37,30 @@ def trigger_single_run(
     return {"status": "started", "ticker": ticker.upper()}
 
 
+@router.get("/last-run")
+def get_last_run(
+    db: Session = Depends(get_db),
+    _user=Depends(get_current_user),
+):
+    """Return the most recent agent run or null."""
+    run = (
+        db.query(AgentRun)
+        .order_by(AgentRun.started_at.desc())
+        .first()
+    )
+    if run is None:
+        return None
+    return {
+        "id": run.id,
+        "started_at": run.started_at,
+        "completed_at": run.completed_at,
+        "status": run.status,
+        "companies_total": run.companies_total,
+        "companies_success": run.companies_success,
+        "companies_failed": run.companies_failed,
+    }
+
+
 @router.get("/runs")
 def list_runs(
     limit: int = 10,

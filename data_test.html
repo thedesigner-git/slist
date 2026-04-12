@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Alphascreen - All Metrics</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0a0a0a; color: #e5e5e5; padding: 32px; }
+h1 { color: #f97316; font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.sub { color: #555; font-size: 12px; margin-bottom: 28px; }
+.sub .on { color: #4ade80; font-weight: 600; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(540px, 1fr)); gap: 20px; }
+.card { background: #111; border: 1px solid #1f1f1f; border-radius: 10px; overflow: hidden; }
+.card-head { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid #1a1a1a; }
+.card-ident { flex: 1; }
+.cticker { font-size: 20px; font-weight: 800; color: #f97316; display: block; }
+.cname { font-size: 12px; color: #555; }
+.badge-yes { background: #14532d; color: #4ade80; border: 1px solid #166534; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+.badge-no  { background: #1a1a1a; color: #555; border: 1px solid #2a2a2a; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+.scorerow { display: flex; gap: 24px; padding: 10px 18px; background: #0d0d0d; border-bottom: 1px solid #1a1a1a; }
+.sstat { font-size: 11px; color: #555; }
+.sstat strong { display: block; font-size: 15px; font-weight: 700; }
+.stat-orange { color: #f97316; }
+.stat-green  { color: #22c55e; }
+.stat-red    { color: #ef4444; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+thead th { padding: 6px 12px 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .7px; color: #444; text-align: left; background: #0d0d0d; border-bottom: 1px solid #1a1a1a; }
+tbody tr:hover { background: #161616; }
+td { padding: 6px 12px; border-bottom: 1px solid #161616; }
+.section-row td { background: #0f0f0f; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #3a3a3a; padding: 7px 12px; }
+.crit-name { color: #999; }
+.crit-val { font-weight: 600; color: #e5e5e5; font-variant-numeric: tabular-nums; text-align: right; }
+.crit-thresh { color: #444; text-align: right; }
+.crit-result { text-align: center; width: 60px; }
+.res-pass { color: #22c55e; font-weight: 700; }
+.res-fail { color: #ef4444; font-weight: 700; }
+.res-na   { color: #3a3a3a; }
+.na-val   { color: #3a3a3a; }
+.bool-yes { color: #22c55e; font-weight: 600; }
+.bool-no  { color: #ef4444; font-weight: 600; }
+.tag-on  { display: inline-block; background: #14301a; color: #4ade80; font-size: 8px; font-weight: 700; padding: 1px 5px; border-radius: 3px; margin-left: 5px; vertical-align: middle; letter-spacing: .3px; }
+.tag-off { display: inline-block; background: #1a1a1a; color: #444; font-size: 8px; font-weight: 700; padding: 1px 5px; border-radius: 3px; margin-left: 5px; vertical-align: middle; letter-spacing: .3px; }
+</style>
+</head>
+<body>
+<h1>Alphascreen - All 20 Metrics</h1>
+<p class="sub">5 companies &middot; live yfinance data &middot; default criteria: 5 growth + 5 value &nbsp;<span class="on">ON</span> = enabled by default</p>
+<div class="grid">
+
+<div class="card">
+  <div class="card-head">
+    <div class="card-ident">
+      <span class="cticker">AAPL</span>
+      <span class="cname">Apple Inc. &middot; US</span>
+    </div>
+    <span class="badge-no">NOT SHORTLISTED</span>
+  </div>
+  <div class="scorerow">
+    <div class="sstat">Score<strong class="stat-orange">60%</strong></div>
+    <div class="sstat">Criteria<strong class="stat-orange">6/10</strong></div>
+    <div class="sstat">Growth<strong class="stat-green">Pass</strong></div>
+    <div class="sstat">Value<strong class="stat-red">Fail</strong></div>
+  </div>
+  <table>
+    <thead><tr><th>Criterion</th><th>Value</th><th>Threshold</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr class="section-row"><td colspan="4">Growth Criteria</td></tr>
+      <tr><td class="crit-name">Revenue YoY Growth<span class="tag-on">ON</span></td><td class="crit-val">15.7%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">EPS YoY Growth<span class="tag-on">ON</span></td><td class="crit-val">18.3%</td><td class="crit-thresh">> 10%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Return on Equity<span class="tag-on">ON</span></td><td class="crit-val">152.0%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Gross Margin<span class="tag-on">ON</span></td><td class="crit-val">48.2%</td><td class="crit-thresh">> 40%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Operating Margin<span class="tag-on">ON</span></td><td class="crit-val">35.4%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Free Cash Flow Growth<span class="tag-off">OFF</span></td><td class="crit-val">91.0%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Net Profit Margin<span class="tag-off">OFF</span></td><td class="crit-val">29.3%</td><td class="crit-thresh">> 10%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">R&D as % of Revenue<span class="tag-off">OFF</span></td><td class="crit-val">7.6%</td><td class="crit-thresh">> 8%</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">3+ Years Consistent EPS Growth<span class="tag-off">OFF</span></td><td class="crit-val"><span class="bool-no">No</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">P/E < 1.5x Sector Average<span class="tag-off">OFF</span></td><td class="crit-val"><span class="bool-yes">Yes</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+
+      <tr class="section-row"><td colspan="4">Value Criteria</td></tr>
+      <tr><td class="crit-name">P/E < Market Average<span class="tag-on">ON</span></td><td class="crit-val"><span class="bool-no">No</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Price-to-Book<span class="tag-on">ON</span></td><td class="crit-val">41.48x</td><td class="crit-thresh">< 2x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Positive Free Cash Flow<span class="tag-on">ON</span></td><td class="crit-val"><span class="bool-yes">Yes</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Debt/Equity<span class="tag-on">ON</span></td><td class="crit-val">102.63x</td><td class="crit-thresh">< 1x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">EV/EBITDA<span class="tag-on">ON</span></td><td class="crit-val">24.44x</td><td class="crit-thresh">< 15x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Dividend Yield<span class="tag-off">OFF</span></td><td class="crit-val">41.0%</td><td class="crit-thresh">> 2%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Price/Sales<span class="tag-off">OFF</span></td><td class="crit-val">8.39x</td><td class="crit-thresh">< 3x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Current Ratio<span class="tag-off">OFF</span></td><td class="crit-val">0.97x</td><td class="crit-thresh">> 2x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Interest Coverage<span class="tag-off">OFF</span></td><td class="crit-val"><span class="na-val">N/A</span></td><td class="crit-thresh">> 5x</td><td class="crit-result"><span class="res-na">N/A</span></td></tr>
+<tr><td class="crit-name">Price/FCF<span class="tag-off">OFF</span></td><td class="crit-val">34.40x</td><td class="crit-thresh">< 25x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div class="card-ident">
+      <span class="cticker">MSFT</span>
+      <span class="cname">Microsoft Corporation &middot; US</span>
+    </div>
+    <span class="badge-yes">SHORTLISTED</span>
+  </div>
+  <div class="scorerow">
+    <div class="sstat">Score<strong class="stat-orange">70%</strong></div>
+    <div class="sstat">Criteria<strong class="stat-orange">7/10</strong></div>
+    <div class="sstat">Growth<strong class="stat-green">Pass</strong></div>
+    <div class="sstat">Value<strong class="stat-red">Fail</strong></div>
+  </div>
+  <table>
+    <thead><tr><th>Criterion</th><th>Value</th><th>Threshold</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr class="section-row"><td colspan="4">Growth Criteria</td></tr>
+      <tr><td class="crit-name">Revenue YoY Growth<span class="tag-on">ON</span></td><td class="crit-val">16.7%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">EPS YoY Growth<span class="tag-on">ON</span></td><td class="crit-val">59.8%</td><td class="crit-thresh">> 10%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Return on Equity<span class="tag-on">ON</span></td><td class="crit-val">34.4%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Gross Margin<span class="tag-on">ON</span></td><td class="crit-val">68.0%</td><td class="crit-thresh">> 40%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Operating Margin<span class="tag-on">ON</span></td><td class="crit-val">47.1%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Free Cash Flow Growth<span class="tag-off">OFF</span></td><td class="crit-val">-9.3%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Net Profit Margin<span class="tag-off">OFF</span></td><td class="crit-val">47.3%</td><td class="crit-thresh">> 10%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">R&D as % of Revenue<span class="tag-off">OFF</span></td><td class="crit-val">10.5%</td><td class="crit-thresh">> 8%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">3+ Years Consistent EPS Growth<span class="tag-off">OFF</span></td><td class="crit-val"><span class="bool-no">No</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">P/E < 1.5x Sector Average<span class="tag-off">OFF</span></td><td class="crit-val"><span class="bool-yes">Yes</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+
+      <tr class="section-row"><td colspan="4">Value Criteria</td></tr>
+      <tr><td class="crit-name">P/E < Market Average<span class="tag-on">ON</span></td><td class="crit-val"><span class="bool-yes">Yes</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Price-to-Book<span class="tag-on">ON</span></td><td class="crit-val">6.78x</td><td class="crit-thresh">< 2x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Positive Free Cash Flow<span class="tag-on">ON</span></td><td class="crit-val"><span class="bool-yes">Yes</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Debt/Equity<span class="tag-on">ON</span></td><td class="crit-val">31.54x</td><td class="crit-thresh">< 1x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">EV/EBITDA<span class="tag-on">ON</span></td><td class="crit-val">15.70x</td><td class="crit-thresh">< 15x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Dividend Yield<span class="tag-off">OFF</span></td><td class="crit-val">99.0%</td><td class="crit-thresh">> 2%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Price/Sales<span class="tag-off">OFF</span></td><td class="crit-val">8.68x</td><td class="crit-thresh">< 3x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Current Ratio<span class="tag-off">OFF</span></td><td class="crit-val">1.39x</td><td class="crit-thresh">> 2x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Interest Coverage<span class="tag-off">OFF</span></td><td class="crit-val">52.00x</td><td class="crit-thresh">> 5x</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Price/FCF<span class="tag-off">OFF</span></td><td class="crit-val">49.43x</td><td class="crit-thresh">< 25x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div class="card-ident">
+      <span class="cticker">NVDA</span>
+      <span class="cname">NVIDIA Corporation &middot; US</span>
+    </div>
+    <span class="badge-no">NOT SHORTLISTED</span>
+  </div>
+  <div class="scorerow">
+    <div class="sstat">Score<strong class="stat-orange">60%</strong></div>
+    <div class="sstat">Criteria<strong class="stat-orange">6/10</strong></div>
+    <div class="sstat">Growth<strong class="stat-green">Pass</strong></div>
+    <div class="sstat">Value<strong class="stat-red">Fail</strong></div>
+  </div>
+  <table>
+    <thead><tr><th>Criterion</th><th>Value</th><th>Threshold</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr class="section-row"><td colspan="4">Growth Criteria</td></tr>
+      <tr><td class="crit-name">Revenue YoY Growth<span class="tag-on">ON</span></td><td class="crit-val">73.2%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">EPS YoY Growth<span class="tag-on">ON</span></td><td class="crit-val">97.8%</td><td class="crit-thresh">> 10%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Return on Equity<span class="tag-on">ON</span></td><td class="crit-val">101.5%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Gross Margin<span class="tag-on">ON</span></td><td class="crit-val">75.0%</td><td class="crit-thresh">> 40%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Operating Margin<span class="tag-on">ON</span></td><td class="crit-val">65.0%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Free Cash Flow Growth<span class="tag-off">OFF</span></td><td class="crit-val">124.4%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Net Profit Margin<span class="tag-off">OFF</span></td><td class="crit-val">63.1%</td><td class="crit-thresh">> 10%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">R&D as % of Revenue<span class="tag-off">OFF</span></td><td class="crit-val">8.1%</td><td class="crit-thresh">> 8%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">3+ Years Consistent EPS Growth<span class="tag-off">OFF</span></td><td class="crit-val"><span class="bool-no">No</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">P/E < 1.5x Sector Average<span class="tag-off">OFF</span></td><td class="crit-val"><span class="bool-yes">Yes</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+
+      <tr class="section-row"><td colspan="4">Value Criteria</td></tr>
+      <tr><td class="crit-name">P/E < Market Average<span class="tag-on">ON</span></td><td class="crit-val"><span class="bool-no">No</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Price-to-Book<span class="tag-on">ON</span></td><td class="crit-val">25.88x</td><td class="crit-thresh">< 2x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Positive Free Cash Flow<span class="tag-on">ON</span></td><td class="crit-val"><span class="bool-yes">Yes</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Debt/Equity<span class="tag-on">ON</span></td><td class="crit-val">7.25x</td><td class="crit-thresh">< 1x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">EV/EBITDA<span class="tag-on">ON</span></td><td class="crit-val">30.85x</td><td class="crit-thresh">< 15x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Dividend Yield<span class="tag-off">OFF</span></td><td class="crit-val">2.0%</td><td class="crit-thresh">> 2%</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Price/Sales<span class="tag-off">OFF</span></td><td class="crit-val">18.86x</td><td class="crit-thresh">< 3x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Current Ratio<span class="tag-off">OFF</span></td><td class="crit-val">3.90x</td><td class="crit-thresh">> 2x</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Interest Coverage<span class="tag-off">OFF</span></td><td class="crit-val">606.84x</td><td class="crit-thresh">> 5x</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Price/FCF<span class="tag-off">OFF</span></td><td class="crit-val">70.04x</td><td class="crit-thresh">< 25x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div class="card-ident">
+      <span class="cticker">GOOGL</span>
+      <span class="cname">Alphabet Inc. &middot; US</span>
+    </div>
+    <span class="badge-yes">SHORTLISTED</span>
+  </div>
+  <div class="scorerow">
+    <div class="sstat">Score<strong class="stat-orange">70%</strong></div>
+    <div class="sstat">Criteria<strong class="stat-orange">7/10</strong></div>
+    <div class="sstat">Growth<strong class="stat-green">Pass</strong></div>
+    <div class="sstat">Value<strong class="stat-red">Fail</strong></div>
+  </div>
+  <table>
+    <thead><tr><th>Criterion</th><th>Value</th><th>Threshold</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr class="section-row"><td colspan="4">Growth Criteria</td></tr>
+      <tr><td class="crit-name">Revenue YoY Growth<span class="tag-on">ON</span></td><td class="crit-val">18.0%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">EPS YoY Growth<span class="tag-on">ON</span></td><td class="crit-val">31.2%</td><td class="crit-thresh">> 10%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Return on Equity<span class="tag-on">ON</span></td><td class="crit-val">35.7%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Gross Margin<span class="tag-on">ON</span></td><td class="crit-val">59.6%</td><td class="crit-thresh">> 40%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Operating Margin<span class="tag-on">ON</span></td><td class="crit-val">31.5%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Free Cash Flow Growth<span class="tag-off">OFF</span></td><td class="crit-val">-1.2%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Net Profit Margin<span class="tag-off">OFF</span></td><td class="crit-val">31.2%</td><td class="crit-thresh">> 10%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">R&D as % of Revenue<span class="tag-off">OFF</span></td><td class="crit-val">15.1%</td><td class="crit-thresh">> 8%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">3+ Years Consistent EPS Growth<span class="tag-off">OFF</span></td><td class="crit-val"><span class="bool-no">No</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">P/E < 1.5x Sector Average<span class="tag-off">OFF</span></td><td class="crit-val"><span class="bool-yes">Yes</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+
+      <tr class="section-row"><td colspan="4">Value Criteria</td></tr>
+      <tr><td class="crit-name">P/E < Market Average<span class="tag-on">ON</span></td><td class="crit-val"><span class="bool-yes">Yes</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Price-to-Book<span class="tag-on">ON</span></td><td class="crit-val">7.99x</td><td class="crit-thresh">< 2x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Positive Free Cash Flow<span class="tag-on">ON</span></td><td class="crit-val"><span class="bool-yes">Yes</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Debt/Equity<span class="tag-on">ON</span></td><td class="crit-val">16.13x</td><td class="crit-thresh">< 1x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">EV/EBITDA<span class="tag-on">ON</span></td><td class="crit-val">22.23x</td><td class="crit-thresh">< 15x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Dividend Yield<span class="tag-off">OFF</span></td><td class="crit-val">30.0%</td><td class="crit-thresh">> 2%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Price/Sales<span class="tag-off">OFF</span></td><td class="crit-val">8.24x</td><td class="crit-thresh">< 3x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Current Ratio<span class="tag-off">OFF</span></td><td class="crit-val">2.00x</td><td class="crit-thresh">> 2x</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Interest Coverage<span class="tag-off">OFF</span></td><td class="crit-val">120.58x</td><td class="crit-thresh">> 5x</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Price/FCF<span class="tag-off">OFF</span></td><td class="crit-val">87.13x</td><td class="crit-thresh">< 25x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div class="card-ident">
+      <span class="cticker">META</span>
+      <span class="cname">Meta Platforms, Inc. &middot; US</span>
+    </div>
+    <span class="badge-yes">SHORTLISTED</span>
+  </div>
+  <div class="scorerow">
+    <div class="sstat">Score<strong class="stat-orange">80%</strong></div>
+    <div class="sstat">Criteria<strong class="stat-orange">8/10</strong></div>
+    <div class="sstat">Growth<strong class="stat-green">Pass</strong></div>
+    <div class="sstat">Value<strong class="stat-green">Pass</strong></div>
+  </div>
+  <table>
+    <thead><tr><th>Criterion</th><th>Value</th><th>Threshold</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr class="section-row"><td colspan="4">Growth Criteria</td></tr>
+      <tr><td class="crit-name">Revenue YoY Growth<span class="tag-on">ON</span></td><td class="crit-val">23.8%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">EPS YoY Growth<span class="tag-on">ON</span></td><td class="crit-val">10.7%</td><td class="crit-thresh">> 10%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Return on Equity<span class="tag-on">ON</span></td><td class="crit-val">30.2%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Gross Margin<span class="tag-on">ON</span></td><td class="crit-val">81.8%</td><td class="crit-thresh">> 40%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Operating Margin<span class="tag-on">ON</span></td><td class="crit-val">41.3%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Free Cash Flow Growth<span class="tag-off">OFF</span></td><td class="crit-val">9.3%</td><td class="crit-thresh">> 15%</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Net Profit Margin<span class="tag-off">OFF</span></td><td class="crit-val">38.0%</td><td class="crit-thresh">> 10%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">R&D as % of Revenue<span class="tag-off">OFF</span></td><td class="crit-val">28.6%</td><td class="crit-thresh">> 8%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">3+ Years Consistent EPS Growth<span class="tag-off">OFF</span></td><td class="crit-val"><span class="bool-no">No</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">P/E < 1.5x Sector Average<span class="tag-off">OFF</span></td><td class="crit-val"><span class="bool-yes">Yes</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+
+      <tr class="section-row"><td colspan="4">Value Criteria</td></tr>
+      <tr><td class="crit-name">P/E < Market Average<span class="tag-on">ON</span></td><td class="crit-val"><span class="bool-yes">Yes</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Price-to-Book<span class="tag-on">ON</span></td><td class="crit-val">6.12x</td><td class="crit-thresh">< 2x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Positive Free Cash Flow<span class="tag-on">ON</span></td><td class="crit-val"><span class="bool-yes">Yes</span></td><td class="crit-thresh">Yes</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Debt/Equity<span class="tag-on">ON</span></td><td class="crit-val">39.16x</td><td class="crit-thresh">< 1x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">EV/EBITDA<span class="tag-on">ON</span></td><td class="crit-val">13.63x</td><td class="crit-thresh">< 15x</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Dividend Yield<span class="tag-off">OFF</span></td><td class="crit-val">38.0%</td><td class="crit-thresh">> 2%</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Price/Sales<span class="tag-off">OFF</span></td><td class="crit-val">6.62x</td><td class="crit-thresh">< 3x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+<tr><td class="crit-name">Current Ratio<span class="tag-off">OFF</span></td><td class="crit-val">2.60x</td><td class="crit-thresh">> 2x</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Interest Coverage<span class="tag-off">OFF</span></td><td class="crit-val">54.27x</td><td class="crit-thresh">> 5x</td><td class="crit-result"><span class="res-pass">Pass</span></td></tr>
+<tr><td class="crit-name">Price/FCF<span class="tag-off">OFF</span></td><td class="crit-val">56.75x</td><td class="crit-thresh">< 25x</td><td class="crit-result"><span class="res-fail">Fail</span></td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+</div>
+</body>
+</html>

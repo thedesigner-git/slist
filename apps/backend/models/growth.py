@@ -1,6 +1,8 @@
 from datetime import datetime
-from sqlalchemy import Integer, String, DateTime, Numeric, ForeignKey, UniqueConstraint, func
+
+from sqlalchemy import DateTime, ForeignKey, Integer, Numeric, String, UniqueConstraint, func
 from sqlalchemy.orm import Mapped, mapped_column
+
 from db import Base
 
 
@@ -16,4 +18,8 @@ class GrowthMetric(Base):
     gross_margin: Mapped[float] = mapped_column(Numeric, nullable=True)
     operating_margin: Mapped[float] = mapped_column(Numeric, nullable=True)
     fcf_margin: Mapped[float] = mapped_column(Numeric, nullable=True)
+    # Extended metrics (v2)
+    net_profit_margin: Mapped[float] = mapped_column(Numeric, nullable=True)
+    fcf_growth: Mapped[float] = mapped_column(Numeric, nullable=True)
+    rd_percent: Mapped[float] = mapped_column(Numeric, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

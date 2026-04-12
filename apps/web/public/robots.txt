@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# Alphascreen is a private authenticated application.
+# There is no public content to index.

@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* ── Figma Design Tokens ── */
+:root {
+  --sidebar-width: 200px;
+
+  /* Backgrounds */
+  --bg-sidebar:  #0A0A0A;
+  --bg-page:     #FFFFFF;
+  --bg-surface:  #F9FAFB;
+  --bg-card:     #FFFFFF;
+
+  /* Text */
+  --text-primary:        #111827;
+  --text-secondary:      #374151;
+  --text-muted:          #6B7280;
+  --text-faint:          #9CA3AF;
+  --text-on-dark:        #FFFFFF;
+  --text-on-dark-muted:  rgba(255,255,255,0.38);
+
+  /* Accent – orange */
+  --accent:       #F97316;
+  --accent-hover: #EA6C0A;
+
+  /* Financial signals */
+  --signal-up:   #22C55E;
+  --signal-down: #EF4444;
+
+  /* Strategy label colors */
+  --strategy-growth: #5A9D5C;
+  --strategy-value:  #8D7332;
+
+  /* Borders */
+  --border:       #E5E7EB;
+  --border-light: #F3F4F6;
+  --border-strong:#D1D5DB;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 16px; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Thin scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Remove orange focus outline inside modals for text inputs */
+.no-focus-ring:focus-visible,
+.no-focus-ring:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Shimmer skeleton animation */
+@keyframes shimmer {
+  0% { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.5s infinite ease-in-out;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

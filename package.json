@@ -1,11 +1,11 @@
 {
-  "name": "investiq",
+  "name": "alphascreen",
   "private": true,
   "workspaces": ["apps/web", "apps/mobile", "packages/*"],
   "scripts": {
-    "dev:web": "npm -w @investiq/web run dev",
-    "lint": "npm -w @investiq/web run lint && npm -w @investiq/types run typecheck",
-    "typecheck": "npm -w @investiq/web run typecheck && npm -w @investiq/types run typecheck",
-    "test": "npm -w @investiq/web run test"
+    "dev:web": "npm -w @alphascreen/web run dev",
+    "lint": "npm -w @alphascreen/web run lint && npm -w @alphascreen/types run typecheck",
+    "typecheck": "npm -w @alphascreen/web run typecheck && npm -w @alphascreen/types run typecheck",
+    "test": "npm -w @alphascreen/web run test"
   }
 }

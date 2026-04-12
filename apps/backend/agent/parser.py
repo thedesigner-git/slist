@@ -44,6 +44,7 @@ def parse_financials(ticker: str, df_income, df_balance, df_cashflow) -> list[di
                 "operating_income": _safe_get(df_income, "Operating Income", i),
                 "net_income": _safe_get(df_income, "Net Income", i),
                 "eps_diluted": _safe_get(df_income, "Diluted EPS", i),
+                "research_development": _safe_get(df_income, "Research And Development", i),
             },
             "balance_sheet": {
                 "total_assets": _safe_get(df_balance, "Total Assets", i),
@@ -62,11 +63,27 @@ def parse_financials(ticker: str, df_income, df_balance, df_cashflow) -> list[di
 
 def parse_info(ticker: str, info: dict) -> dict:
     """Parse yfinance .info dict into company + ratio fields."""
+    # Build location from city + country
+    city = info.get("city")
+    country = info.get("country")
+    location = None
+    if city and country:
+        location = f"{city}, {country}"
+    elif country:
+        location = country
+
+    # Extract founding year from companyOfficers or other fields if available
+    founded = None
+
     return {
         "name": info.get("longName") or info.get("shortName") or ticker,
         "sector": info.get("sector"),
         "market_cap": info.get("marketCap"),
         "currency": info.get("currency"),
+        "description": info.get("longBusinessSummary"),
+        "location": location,
+        "employees": info.get("fullTimeEmployees"),
+        "founded": founded,
         "ratios": {
             "pe_ratio": info.get("trailingPE"),
             "pb_ratio": info.get("priceToBook"),

@@ -1,90 +1,458 @@
 [
-  {"ticker": "AAPL", "name": "Apple Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "MSFT", "name": "Microsoft Corp.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "GOOGL", "name": "Alphabet Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "AMZN", "name": "Amazon.com Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "META", "name": "Meta Platforms Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "NVDA", "name": "NVIDIA Corp.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "TSLA", "name": "Tesla Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "AMD", "name": "Advanced Micro Devices Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "ORCL", "name": "Oracle Corp.", "market": "US", "exchange": "NYSE"},
-  {"ticker": "CRM", "name": "Salesforce Inc.", "market": "US", "exchange": "NYSE"},
-  {"ticker": "ADBE", "name": "Adobe Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "INTC", "name": "Intel Corp.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "QCOM", "name": "Qualcomm Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "AVGO", "name": "Broadcom Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "TXN", "name": "Texas Instruments Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "MU", "name": "Micron Technology Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "AMAT", "name": "Applied Materials Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "IBM", "name": "IBM Corp.", "market": "US", "exchange": "NYSE"},
-  {"ticker": "HPE", "name": "Hewlett Packard Enterprise Co.", "market": "US", "exchange": "NYSE"},
-  {"ticker": "DELL", "name": "Dell Technologies Inc.", "market": "US", "exchange": "NYSE"},
-  {"ticker": "SNOW", "name": "Snowflake Inc.", "market": "US", "exchange": "NYSE"},
-  {"ticker": "PLTR", "name": "Palantir Technologies Inc.", "market": "US", "exchange": "NYSE"},
-  {"ticker": "NET", "name": "Cloudflare Inc.", "market": "US", "exchange": "NYSE"},
-  {"ticker": "DDOG", "name": "Datadog Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "ZS", "name": "Zscaler Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "CRWD", "name": "CrowdStrike Holdings Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "NOW", "name": "ServiceNow Inc.", "market": "US", "exchange": "NYSE"},
-  {"ticker": "WDAY", "name": "Workday Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "TEAM", "name": "Atlassian Corp.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "MDB", "name": "MongoDB Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "ZM", "name": "Zoom Video Communications Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "DOCU", "name": "DocuSign Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "OKTA", "name": "Okta Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "PANW", "name": "Palo Alto Networks Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "FTNT", "name": "Fortinet Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "CDNS", "name": "Cadence Design Systems Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "SNPS", "name": "Synopsys Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "KLAC", "name": "KLA Corp.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "LRCX", "name": "Lam Research Corp.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "MRVL", "name": "Marvell Technology Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "MCHP", "name": "Microchip Technology Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "ON", "name": "ON Semiconductor Corp.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "STX", "name": "Seagate Technology Holdings plc", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "WDC", "name": "Western Digital Corp.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "PSTG", "name": "Pure Storage Inc.", "market": "US", "exchange": "NYSE"},
-  {"ticker": "NTAP", "name": "NetApp Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "FFIV", "name": "F5 Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "JNPR", "name": "Juniper Networks Inc.", "market": "US", "exchange": "NYSE"},
-  {"ticker": "CSCO", "name": "Cisco Systems Inc.", "market": "US", "exchange": "NASDAQ"},
-  {"ticker": "ANET", "name": "Arista Networks Inc.", "market": "US", "exchange": "NYSE"},
-
-  {"ticker": "SAP.DE", "name": "SAP SE", "market": "DE", "exchange": "XETRA"},
-  {"ticker": "IFX.DE", "name": "Infineon Technologies AG", "market": "DE", "exchange": "XETRA"},
-  {"ticker": "DTE.DE", "name": "Deutsche Telekom AG", "market": "DE", "exchange": "XETRA"},
-  {"ticker": "SIE.DE", "name": "Siemens AG", "market": "DE", "exchange": "XETRA"},
-  {"ticker": "AIXA.DE", "name": "Aixtron SE", "market": "DE", "exchange": "XETRA"},
-  {"ticker": "EVT.DE", "name": "Evotec SE", "market": "DE", "exchange": "XETRA"},
-  {"ticker": "NDX1.DE", "name": "Nordex SE", "market": "DE", "exchange": "XETRA"},
-  {"ticker": "BOSS.DE", "name": "Hugo Boss AG", "market": "DE", "exchange": "XETRA"},
-  {"ticker": "DHER.DE", "name": "Delivery Hero SE", "market": "DE", "exchange": "XETRA"},
-  {"ticker": "TL0.DE", "name": "Telekom Romania Communications SA", "market": "DE", "exchange": "XETRA"},
-
-  {"ticker": "0700.HK", "name": "Tencent Holdings Ltd.", "market": "HK", "exchange": "HKEX"},
-  {"ticker": "9988.HK", "name": "Alibaba Group Holding Ltd.", "market": "HK", "exchange": "HKEX"},
-  {"ticker": "9618.HK", "name": "JD.com Inc.", "market": "HK", "exchange": "HKEX"},
-  {"ticker": "1810.HK", "name": "Xiaomi Corp.", "market": "HK", "exchange": "HKEX"},
-  {"ticker": "9999.HK", "name": "NetEase Inc.", "market": "HK", "exchange": "HKEX"},
-  {"ticker": "3690.HK", "name": "Meituan", "market": "HK", "exchange": "HKEX"},
-  {"ticker": "BIDU", "name": "Baidu Inc.", "market": "HK", "exchange": "NASDAQ"},
-  {"ticker": "9866.HK", "name": "NIO Inc.", "market": "HK", "exchange": "HKEX"},
-  {"ticker": "2382.HK", "name": "Sunny Optical Technology Group Co.", "market": "HK", "exchange": "HKEX"},
-  {"ticker": "6690.HK", "name": "Haier Smart Home Co.", "market": "HK", "exchange": "HKEX"},
-  {"ticker": "9961.HK", "name": "Trip.com Group Ltd.", "market": "HK", "exchange": "HKEX"},
-  {"ticker": "9626.HK", "name": "Bilibili Inc.", "market": "HK", "exchange": "HKEX"},
-  {"ticker": "1024.HK", "name": "Kuaishou Technology", "market": "HK", "exchange": "HKEX"},
-  {"ticker": "0992.HK", "name": "Lenovo Group Ltd.", "market": "HK", "exchange": "HKEX"},
-  {"ticker": "9888.HK", "name": "Baidu Inc. (HK)", "market": "HK", "exchange": "HKEX"},
-
-  {"ticker": "ASML.AS", "name": "ASML Holding N.V.", "market": "EU", "exchange": "AMS"},
-  {"ticker": "NOKIA.HE", "name": "Nokia Oyj", "market": "EU", "exchange": "HSE"},
-  {"ticker": "ERIC-B.ST", "name": "Telefonaktiebolaget LM Ericsson", "market": "EU", "exchange": "SSE"},
-  {"ticker": "CAP.PA", "name": "Capgemini SE", "market": "EU", "exchange": "EPA"},
-  {"ticker": "DSY.PA", "name": "Dassault Systemes SE", "market": "EU", "exchange": "EPA"},
-  {"ticker": "STM.MI", "name": "STMicroelectronics N.V.", "market": "EU", "exchange": "BIT"},
-  {"ticker": "ADYEN.AS", "name": "Adyen N.V.", "market": "EU", "exchange": "AMS"},
-  {"ticker": "DASSF", "name": "Dassault Aviation SA", "market": "EU", "exchange": "OTC"},
-  {"ticker": "CAPP", "name": "Capcom Co. Ltd.", "market": "EU", "exchange": "OTC"},
-  {"ticker": "PHIA.AS", "name": "Koninklijke Philips N.V.", "market": "EU", "exchange": "AMS"}
+  {
+    "ticker": "AAPL",
+    "name": "Apple Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "MSFT",
+    "name": "Microsoft Corp.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "GOOGL",
+    "name": "Alphabet Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "AMZN",
+    "name": "Amazon.com Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "META",
+    "name": "Meta Platforms Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "NVDA",
+    "name": "NVIDIA Corp.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "TSLA",
+    "name": "Tesla Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "AMD",
+    "name": "Advanced Micro Devices Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "ORCL",
+    "name": "Oracle Corp.",
+    "market": "US",
+    "exchange": "NYSE"
+  },
+  {
+    "ticker": "CRM",
+    "name": "Salesforce Inc.",
+    "market": "US",
+    "exchange": "NYSE"
+  },
+  {
+    "ticker": "ADBE",
+    "name": "Adobe Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "INTC",
+    "name": "Intel Corp.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "QCOM",
+    "name": "Qualcomm Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "AVGO",
+    "name": "Broadcom Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "TXN",
+    "name": "Texas Instruments Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "MU",
+    "name": "Micron Technology Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "AMAT",
+    "name": "Applied Materials Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "IBM",
+    "name": "IBM Corp.",
+    "market": "US",
+    "exchange": "NYSE"
+  },
+  {
+    "ticker": "HPE",
+    "name": "Hewlett Packard Enterprise Co.",
+    "market": "US",
+    "exchange": "NYSE"
+  },
+  {
+    "ticker": "DELL",
+    "name": "Dell Technologies Inc.",
+    "market": "US",
+    "exchange": "NYSE"
+  },
+  {
+    "ticker": "SNOW",
+    "name": "Snowflake Inc.",
+    "market": "US",
+    "exchange": "NYSE"
+  },
+  {
+    "ticker": "PLTR",
+    "name": "Palantir Technologies Inc.",
+    "market": "US",
+    "exchange": "NYSE"
+  },
+  {
+    "ticker": "NET",
+    "name": "Cloudflare Inc.",
+    "market": "US",
+    "exchange": "NYSE"
+  },
+  {
+    "ticker": "DDOG",
+    "name": "Datadog Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "ZS",
+    "name": "Zscaler Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "CRWD",
+    "name": "CrowdStrike Holdings Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "NOW",
+    "name": "ServiceNow Inc.",
+    "market": "US",
+    "exchange": "NYSE"
+  },
+  {
+    "ticker": "WDAY",
+    "name": "Workday Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "TEAM",
+    "name": "Atlassian Corp.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "MDB",
+    "name": "MongoDB Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "ZM",
+    "name": "Zoom Video Communications Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "DOCU",
+    "name": "DocuSign Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "OKTA",
+    "name": "Okta Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "PANW",
+    "name": "Palo Alto Networks Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "FTNT",
+    "name": "Fortinet Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "CDNS",
+    "name": "Cadence Design Systems Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "SNPS",
+    "name": "Synopsys Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "KLAC",
+    "name": "KLA Corp.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "LRCX",
+    "name": "Lam Research Corp.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "MRVL",
+    "name": "Marvell Technology Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "MCHP",
+    "name": "Microchip Technology Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "ON",
+    "name": "ON Semiconductor Corp.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "STX",
+    "name": "Seagate Technology Holdings plc",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "WDC",
+    "name": "Western Digital Corp.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "PSTG",
+    "name": "Pure Storage Inc.",
+    "market": "US",
+    "exchange": "NYSE"
+  },
+  {
+    "ticker": "NTAP",
+    "name": "NetApp Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "FFIV",
+    "name": "F5 Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "CSCO",
+    "name": "Cisco Systems Inc.",
+    "market": "US",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "ANET",
+    "name": "Arista Networks Inc.",
+    "market": "US",
+    "exchange": "NYSE"
+  },
+  {
+    "ticker": "SAP.DE",
+    "name": "SAP SE",
+    "market": "DE",
+    "exchange": "XETRA"
+  },
+  {
+    "ticker": "IFX.DE",
+    "name": "Infineon Technologies AG",
+    "market": "DE",
+    "exchange": "XETRA"
+  },
+  {
+    "ticker": "DTE.DE",
+    "name": "Deutsche Telekom AG",
+    "market": "DE",
+    "exchange": "XETRA"
+  },
+  {
+    "ticker": "SIE.DE",
+    "name": "Siemens AG",
+    "market": "DE",
+    "exchange": "XETRA"
+  },
+  {
+    "ticker": "AIXA.DE",
+    "name": "Aixtron SE",
+    "market": "DE",
+    "exchange": "XETRA"
+  },
+  {
+    "ticker": "EVT.DE",
+    "name": "Evotec SE",
+    "market": "DE",
+    "exchange": "XETRA"
+  },
+  {
+    "ticker": "NDX1.DE",
+    "name": "Nordex SE",
+    "market": "DE",
+    "exchange": "XETRA"
+  },
+  {
+    "ticker": "BOSS.DE",
+    "name": "Hugo Boss AG",
+    "market": "DE",
+    "exchange": "XETRA"
+  },
+  {
+    "ticker": "TL0.DE",
+    "name": "Telekom Romania Communications SA",
+    "market": "DE",
+    "exchange": "XETRA"
+  },
+  {
+    "ticker": "0700.HK",
+    "name": "Tencent Holdings Ltd.",
+    "market": "HK",
+    "exchange": "HKEX"
+  },
+  {
+    "ticker": "9988.HK",
+    "name": "Alibaba Group Holding Ltd.",
+    "market": "HK",
+    "exchange": "HKEX"
+  },
+  {
+    "ticker": "9618.HK",
+    "name": "JD.com Inc.",
+    "market": "HK",
+    "exchange": "HKEX"
+  },
+  {
+    "ticker": "1810.HK",
+    "name": "Xiaomi Corp.",
+    "market": "HK",
+    "exchange": "HKEX"
+  },
+  {
+    "ticker": "9999.HK",
+    "name": "NetEase Inc.",
+    "market": "HK",
+    "exchange": "HKEX"
+  },
+  {
+    "ticker": "BIDU",
+    "name": "Baidu Inc.",
+    "market": "HK",
+    "exchange": "NASDAQ"
+  },
+  {
+    "ticker": "9866.HK",
+    "name": "NIO Inc.",
+    "market": "HK",
+    "exchange": "HKEX"
+  },
+  {
+    "ticker": "6690.HK",
+    "name": "Haier Smart Home Co.",
+    "market": "HK",
+    "exchange": "HKEX"
+  },
+  {
+    "ticker": "9961.HK",
+    "name": "Trip.com Group Ltd.",
+    "market": "HK",
+    "exchange": "HKEX"
+  },
+  {
+    "ticker": "9626.HK",
+    "name": "Bilibili Inc.",
+    "market": "HK",
+    "exchange": "HKEX"
+  },
+  {
+    "ticker": "1024.HK",
+    "name": "Kuaishou Technology",
+    "market": "HK",
+    "exchange": "HKEX"
+  },
+  {
+    "ticker": "0992.HK",
+    "name": "Lenovo Group Ltd.",
+    "market": "HK",
+    "exchange": "HKEX"
+  },
+  {
+    "ticker": "9888.HK",
+    "name": "Baidu Inc. (HK)",
+    "market": "HK",
+    "exchange": "HKEX"
+  },
+  {
+    "ticker": "ASML.AS",
+    "name": "ASML Holding N.V.",
+    "market": "EU",
+    "exchange": "AMS"
+  },
+  {
+    "ticker": "NOKIA.HE",
+    "name": "Nokia Oyj",
+    "market": "EU",
+    "exchange": "HSE"
+  },
+  {
+    "ticker": "ERIC-B.ST",
+    "name": "Telefonaktiebolaget LM Ericsson",
+    "market": "EU",
+    "exchange": "SSE"
+  },
+  {
+    "ticker": "DSY.PA",
+    "name": "Dassault Systemes SE",
+    "market": "EU",
+    "exchange": "EPA"
+  },
+  {
+    "ticker": "PHIA.AS",
+    "name": "Koninklijke Philips N.V.",
+    "market": "EU",
+    "exchange": "AMS"
+  }
 ]

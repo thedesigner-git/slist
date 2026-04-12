@@ -1,13 +1,15 @@
 import logging
+from typing import Optional
 
-from fastapi import APIRouter, BackgroundTasks, Depends
+from fastapi import APIRouter, Depends
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from agent.scoring import score_all_companies
 from auth import get_current_user
-from db import Session as DBSession
-from db import get_db
+from criteria_defs import ALL_CRITERIA, CRITERIA_BY_ID, build_default_settings
+from db import Session as DBSession, get_db
 from models.company import Company
 from models.screening import ShortlistScore, UserCriteriaSettings
 
@@ -15,39 +17,23 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/criteria", tags=["criteria"])
 
-# Module-level dict tracking per-user background recalculation state
-_recalc_in_progress: dict[str, bool] = {}
-
 
 # ---------------------------------------------------------------------------
-# Pydantic schema for partial settings update
+# Pydantic schemas
 # ---------------------------------------------------------------------------
+
+class CriterionSettingUpdate(BaseModel):
+    enabled: Optional[bool] = None
+    threshold: Optional[float] = None
+
 
 class CriteriaSettingsUpdate(BaseModel):
-    growth_enabled: bool | None = None
-    value_enabled: bool | None = None
-
-    growth_revenue_growth_yoy: float | None = None
-    growth_eps_growth_yoy: float | None = None
-    growth_roe: float | None = None
-    growth_fcf_margin: float | None = None
-
-    growth_revenue_growth_yoy_enabled: bool | None = None
-    growth_eps_growth_yoy_enabled: bool | None = None
-    growth_roe_enabled: bool | None = None
-    growth_fcf_margin_enabled: bool | None = None
-
-    value_pe_ratio: float | None = None
-    value_pb_ratio: float | None = None
-    value_fcf_margin: float | None = None
-    value_debt_to_equity: float | None = None
-
-    value_pe_ratio_enabled: bool | None = None
-    value_pb_ratio_enabled: bool | None = None
-    value_fcf_margin_enabled: bool | None = None
-    value_debt_to_equity_enabled: bool | None = None
-
-    shortlist_threshold: float | None = None
+    growth_enabled: Optional[bool] = None
+    value_enabled: Optional[bool] = None
+    growth_pass_threshold: Optional[int] = None
+    value_pass_threshold: Optional[int] = None
+    shortlist_threshold: Optional[float] = None
+    criteria: Optional[dict[str, CriterionSettingUpdate]] = None
 
 
 # ---------------------------------------------------------------------------
@@ -55,26 +41,21 @@ class CriteriaSettingsUpdate(BaseModel):
 # ---------------------------------------------------------------------------
 
 def _settings_to_dict(s: UserCriteriaSettings) -> dict:
+    # Fill null thresholds with defaults so frontend always shows a value
+    raw = s.criteria or {}
+    criteria = {}
+    for cid, vals in raw.items():
+        t = vals.get("threshold")
+        if t is None and cid in CRITERIA_BY_ID:
+            t = CRITERIA_BY_ID[cid].default_threshold
+        criteria[cid] = {**vals, "threshold": t}
     return {
         "growth_enabled": s.growth_enabled,
         "value_enabled": s.value_enabled,
-        "growth_revenue_growth_yoy": float(s.growth_revenue_growth_yoy),
-        "growth_eps_growth_yoy": float(s.growth_eps_growth_yoy),
-        "growth_roe": float(s.growth_roe),
-        "growth_fcf_margin": float(s.growth_fcf_margin),
-        "growth_revenue_growth_yoy_enabled": s.growth_revenue_growth_yoy_enabled,
-        "growth_eps_growth_yoy_enabled": s.growth_eps_growth_yoy_enabled,
-        "growth_roe_enabled": s.growth_roe_enabled,
-        "growth_fcf_margin_enabled": s.growth_fcf_margin_enabled,
-        "value_pe_ratio": float(s.value_pe_ratio),
-        "value_pb_ratio": float(s.value_pb_ratio),
-        "value_fcf_margin": float(s.value_fcf_margin),
-        "value_debt_to_equity": float(s.value_debt_to_equity),
-        "value_pe_ratio_enabled": s.value_pe_ratio_enabled,
-        "value_pb_ratio_enabled": s.value_pb_ratio_enabled,
-        "value_fcf_margin_enabled": s.value_fcf_margin_enabled,
-        "value_debt_to_equity_enabled": s.value_debt_to_equity_enabled,
+        "growth_pass_threshold": int(s.growth_pass_threshold),
+        "value_pass_threshold": int(s.value_pass_threshold),
         "shortlist_threshold": float(s.shortlist_threshold),
+        "criteria": criteria,
     }
 
 
@@ -87,29 +68,21 @@ def _get_or_create_settings(db: Session, user_id: str) -> UserCriteriaSettings:
         UserCriteriaSettings.user_id == user_id
     ).first()
     if settings is None:
-        settings = UserCriteriaSettings(user_id=user_id)
+        defaults = build_default_settings()
+        settings = UserCriteriaSettings(
+            user_id=user_id,
+            growth_enabled=defaults["growth_enabled"],
+            value_enabled=defaults["value_enabled"],
+            growth_pass_threshold=defaults["growth_pass_threshold"],
+            value_pass_threshold=defaults["value_pass_threshold"],
+            shortlist_threshold=defaults["shortlist_threshold"],
+            criteria=defaults["criteria"],
+        )
         db.add(settings)
         db.commit()
         db.refresh(settings)
         logger.info("Created default criteria settings for user %s", user_id)
     return settings
-
-
-# ---------------------------------------------------------------------------
-# Background recalculation wrapper
-# ---------------------------------------------------------------------------
-
-def score_all_companies_wrapper(user_id: str) -> None:
-    """Open a fresh DB session, run scoring for user, close session."""
-    _recalc_in_progress[user_id] = True
-    db = DBSession()
-    try:
-        score_all_companies(db, user_id)
-    except Exception as e:
-        logger.error("Background scoring failed for user %s: %s", user_id, e)
-    finally:
-        db.close()
-        _recalc_in_progress[user_id] = False
 
 
 # ---------------------------------------------------------------------------
@@ -124,41 +97,75 @@ def get_settings(
     """Return user's criteria settings, seeding defaults on first access (per D-08)."""
     user_id: str = user["sub"]
     settings = _get_or_create_settings(db, user_id)
+    # Trigger scoring on first load if no scores exist yet
+    has_scores = db.query(ShortlistScore).filter(
+        ShortlistScore.user_id == user_id
+    ).first() is not None
+    if not has_scores:
+        scoring_db = DBSession()
+        try:
+            score_all_companies(scoring_db, user_id)
+        except Exception as e:
+            logger.error("Initial scoring failed for user %s: %s", user_id, e)
+        finally:
+            scoring_db.close()
     return _settings_to_dict(settings)
 
 
 @router.put("/settings")
 def update_settings(
     update: CriteriaSettingsUpdate,
-    background_tasks: BackgroundTasks,
     user: dict = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
     Update criteria thresholds/toggles.
 
-    Settings are saved immediately (per D-06). Score recalculates asynchronously
-    in the background — response includes X-Recalculating: true header so the
-    frontend can show a spinner.
+    Settings saved immediately (per D-06). Score recalculates asynchronously.
+    Supports partial updates — only provided fields are changed.
     """
     user_id: str = user["sub"]
     settings = _get_or_create_settings(db, user_id)
 
-    # Apply only the fields that were explicitly provided in the request body
-    for field, value in update.model_dump(exclude_unset=True).items():
-        setattr(settings, field, value)
+    update_data = update.model_dump(exclude_unset=True)
+
+    # Handle top-level scalar fields
+    for field in ("growth_enabled", "value_enabled", "growth_pass_threshold",
+                  "value_pass_threshold", "shortlist_threshold"):
+        if field in update_data:
+            setattr(settings, field, update_data[field])
+
+    # Handle criteria JSONB merge (partial update)
+    if "criteria" in update_data and update_data["criteria"]:
+        current_criteria = dict(settings.criteria or {})
+        for crit_id, crit_update in update_data["criteria"].items():
+            if crit_id not in current_criteria:
+                current_criteria[crit_id] = {}
+            if isinstance(crit_update, dict):
+                current_criteria[crit_id].update(
+                    {k: v for k, v in crit_update.items() if v is not None}
+                )
+            else:
+                # Pydantic model
+                for k, v in crit_update.model_dump(exclude_unset=True).items():
+                    current_criteria[crit_id][k] = v
+        # Force SQLAlchemy to detect JSONB mutation
+        settings.criteria = current_criteria
 
     db.commit()
     db.refresh(settings)
 
-    # Trigger background recalculation (per D-06)
-    background_tasks.add_task(score_all_companies_wrapper, user_id)
+    # Use a fresh session for scoring — the request session's identity map and
+    # transaction state can cause score_all_companies to fail silently.
+    scoring_db = DBSession()
+    try:
+        score_all_companies(scoring_db, user_id)
+    except Exception as e:
+        logger.error("Scoring failed for user %s: %s", user_id, e)
+    finally:
+        scoring_db.close()
 
-    from fastapi.responses import JSONResponse
-    return JSONResponse(
-        content=_settings_to_dict(settings),
-        headers={"X-Recalculating": "true"},
-    )
+    return JSONResponse(content=_settings_to_dict(settings))
 
 
 @router.patch("/watch/{company_id}")
@@ -167,12 +174,7 @@ def toggle_watch(
     user: dict = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """
-    Toggle Watch bookmark for a company (per D-14, D-15).
-
-    Watch forces is_shortlisted=True regardless of score.
-    Removing Watch restores score-based eligibility.
-    """
+    """Toggle Watch bookmark for a company (per D-14, D-15)."""
     user_id: str = user["sub"]
 
     row = db.query(ShortlistScore).filter(
@@ -181,7 +183,6 @@ def toggle_watch(
     ).first()
 
     if row is None:
-        # No score row yet — create with Watch=True immediately (per D-14)
         row = ShortlistScore(
             user_id=user_id,
             company_id=company_id,
@@ -195,13 +196,10 @@ def toggle_watch(
         )
         db.add(row)
     else:
-        # Flip the Watch flag
         row.is_watch = not row.is_watch
         if row.is_watch:
-            # Watch ON → force onto shortlist (per D-14)
             row.is_shortlisted = True
         else:
-            # Watch OFF → restore score-based eligibility (per D-15)
             settings = _get_or_create_settings(db, user_id)
             threshold = float(settings.shortlist_threshold)
             row.is_shortlisted = float(row.score) >= threshold
@@ -220,7 +218,7 @@ def get_shortlist(
     user: dict = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """Return all shortlisted companies for the user (score >= threshold OR is_watch)."""
+    """Return all shortlisted companies for the user."""
     user_id: str = user["sub"]
 
     rows = (
@@ -256,7 +254,7 @@ def get_scores(
     user: dict = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """Return scores for ALL companies (shortlisted or not) so frontend can show full list."""
+    """Return scores for ALL companies."""
     user_id: str = user["sub"]
 
     rows = (
@@ -284,10 +282,27 @@ def get_scores(
     ]
 
 
+@router.get("/definitions")
+def get_criteria_definitions():
+    """Return all 20 criteria definitions for the frontend to render the criteria modal."""
+    return [
+        {
+            "id": c.id,
+            "label": c.label,
+            "preset": c.preset,
+            "direction": c.direction,
+            "default_threshold": c.default_threshold,
+            "default_enabled": c.default_enabled,
+            "is_boolean": c.is_boolean,
+            "suffix": c.suffix,
+        }
+        for c in ALL_CRITERIA
+    ]
+
+
 @router.get("/status")
 def get_recalc_status(
     user: dict = Depends(get_current_user),
 ):
-    """Check whether background scoring recalculation is in progress for this user."""
-    user_id: str = user["sub"]
-    return {"recalculating": _recalc_in_progress.get(user_id, False)}
+    """Scoring is now synchronous — always returns recalculating=False."""
+    return {"recalculating": False}

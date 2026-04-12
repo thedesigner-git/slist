@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(gsd:execute-phase)",
+      "Bash(GSD_TOOLS=\"/c/Users/Huy/.claude/get-shit-done/bin/gsd-tools.cjs\")",
+      "Bash(node \"$GSD_TOOLS\" commit \"docs\\(phase-02\\): complete phase execution\" --files \".planning/ROADMAP.md\" \".planning/STATE.md\" \".planning/phases/02-data-agent-scheduler/02-VERIFICATION.md\")",
+      "Bash(node \"$GSD_TOOLS\" commit \"docs\\(phase-02\\): evolve PROJECT.md after phase completion\" --files \".planning/PROJECT.md\")",
+      "Bash(node \"$GSD_TOOLS\" commit \"docs\\(03\\): phase 3 context — scoring model, criteria config, TTM, labels\" --files \".planning/phases/03-screening-engine/03-CONTEXT.md\")",
+      "Bash(cat D:/claude/new-investment-project/.claude/skills/*/SKILL.md)",
+      "Bash(ls:*)",
+      "Bash(node \"D:/claude/new-investment-project/.claude/../.claude/../node_modules/.bin/gsd-tools\" init plan-phase 03)",
+      "Bash(node \"$HOME/.claude/get-shit-done/bin/gsd-tools.cjs\" init plan-phase 03)",
+      "Bash(node:*)",
+      "Read(//c/Users/Huy/.claude/get-shit-done/**)",
+      "Read(//c/Users/Huy/.claude/get-shit-done/profiles/**)",
+      "Bash(find D:/claude/new-investment-project -name *.png -o -name *.jpg -o -name *.jpeg -o -name *.webp)",
+      "Bash(find D:/claude/new-investment-project/apps/backend -name *.sh -o -name Makefile -o -name Dockerfile)",
+      "Bash(find D:/claude/new-investment-project -name docker-compose*)",
+      "Skill(update-config)",
+      "Bash(cd:*)",
+      "mcp__plugin_figma_figma__get_metadata",
+      "mcp__plugin_figma_figma__get_design_context",
+      "Bash(find d:claudenew-investment-project -path *revolut* -o -path *references*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true
+}

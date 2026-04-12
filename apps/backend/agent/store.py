@@ -28,11 +28,19 @@ def upsert_company(db: Session, ticker: str, market: str, parsed_info: dict) -> 
         sector=parsed_info.get("sector"),
         market_cap=parsed_info.get("market_cap"),
         currency=parsed_info.get("currency"),
+        description=parsed_info.get("description"),
+        location=parsed_info.get("location"),
+        employees=parsed_info.get("employees"),
+        founded=parsed_info.get("founded"),
     )
     stmt = stmt.on_conflict_do_update(
         index_elements=["ticker"],
-        set_={"name": stmt.excluded.name, "sector": stmt.excluded.sector,
-              "market_cap": stmt.excluded.market_cap, "currency": stmt.excluded.currency}
+        set_={
+            "name": stmt.excluded.name, "sector": stmt.excluded.sector,
+            "market_cap": stmt.excluded.market_cap, "currency": stmt.excluded.currency,
+            "description": stmt.excluded.description, "location": stmt.excluded.location,
+            "employees": stmt.excluded.employees, "founded": stmt.excluded.founded,
+        }
     ).returning(Company.id)
     result = db.execute(stmt)
     db.commit()
@@ -40,11 +48,14 @@ def upsert_company(db: Session, ticker: str, market: str, parsed_info: dict) -> 
 
 
 def upsert_financials(db: Session, company_id: int, quarters: list[dict]):
+    # Columns not in the Financials table (used only for growth computation)
+    _financials_exclude = {"research_development"}
     for q in quarters:
         period = q["period"]
+        fin = {k: v for k, v in q["financials"].items() if k not in _financials_exclude}
         _upsert(
             db, Financials,
-            {"company_id": company_id, "period": period, **q["financials"]},
+            {"company_id": company_id, "period": period, **fin},
             ["company_id", "period"],
         )
         _upsert(

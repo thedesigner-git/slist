@@ -1,6 +1,8 @@
 from datetime import datetime
+from typing import Optional
 
 from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, Numeric, String, UniqueConstraint, func
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
 from db import Base
@@ -17,32 +19,15 @@ class UserCriteriaSettings(Base):
     growth_enabled: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="true")
     value_enabled: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="true")
 
-    # Growth thresholds
-    growth_revenue_growth_yoy: Mapped[float] = mapped_column(Numeric, nullable=False, server_default="0.15")
-    growth_eps_growth_yoy: Mapped[float] = mapped_column(Numeric, nullable=False, server_default="0.10")
-    growth_roe: Mapped[float] = mapped_column(Numeric, nullable=False, server_default="0.15")
-    growth_fcf_margin: Mapped[float] = mapped_column(Numeric, nullable=False, server_default="0.0")
+    # Pass thresholds — how many criteria must pass within each preset
+    growth_pass_threshold: Mapped[int] = mapped_column(Integer, nullable=False, server_default="4")
+    value_pass_threshold: Mapped[int] = mapped_column(Integer, nullable=False, server_default="3")
 
-    # Growth individual toggles
-    growth_revenue_growth_yoy_enabled: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="true")
-    growth_eps_growth_yoy_enabled: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="true")
-    growth_roe_enabled: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="true")
-    growth_fcf_margin_enabled: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="true")
-
-    # Value thresholds
-    value_pe_ratio: Mapped[float] = mapped_column(Numeric, nullable=False, server_default="20.0")
-    value_pb_ratio: Mapped[float] = mapped_column(Numeric, nullable=False, server_default="2.0")
-    value_fcf_margin: Mapped[float] = mapped_column(Numeric, nullable=False, server_default="0.0")
-    value_debt_to_equity: Mapped[float] = mapped_column(Numeric, nullable=False, server_default="1.0")
-
-    # Value individual toggles
-    value_pe_ratio_enabled: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="true")
-    value_pb_ratio_enabled: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="true")
-    value_fcf_margin_enabled: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="true")
-    value_debt_to_equity_enabled: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="true")
-
-    # Shortlist threshold (D-02: default 70%)
+    # Overall shortlist threshold (D-02: default 70%)
     shortlist_threshold: Mapped[float] = mapped_column(Numeric, nullable=False, server_default="0.70")
+
+    # JSONB: per-criterion settings { "revenueGrowth": {"enabled": true, "threshold": 0.15}, ... }
+    criteria: Mapped[dict] = mapped_column(JSONB, nullable=False, server_default="{}")
 
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
@@ -56,7 +41,7 @@ class ShortlistScore(Base):
     user_id: Mapped[str] = mapped_column(String(255), nullable=False)
     company_id: Mapped[int] = mapped_column(Integer, ForeignKey("companies.id", ondelete="CASCADE"), nullable=False)
 
-    # Score (0.0–1.0 percentage)
+    # Score (0.0-1.0 percentage)
     score: Mapped[float] = mapped_column(Numeric, nullable=False)
     criteria_passed: Mapped[int] = mapped_column(Integer, nullable=False)
     criteria_total: Mapped[int] = mapped_column(Integer, nullable=False)
@@ -64,6 +49,10 @@ class ShortlistScore(Base):
     # Preset-level pass flags (D-13)
     growth_passed: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="false")
     value_passed: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="false")
+
+    # Per-preset criteria counts (used to classify failing companies)
+    growth_criteria_passed: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    value_criteria_passed: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
 
     # Manual bookmark override (D-14)
     is_watch: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="false")

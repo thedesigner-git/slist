@@ -66,7 +66,12 @@ def run_company(db, company_seed: dict, run_id: int) -> tuple[str, int | None, s
 
             # 4. Ratios (latest quarter)
             latest_period = quarters[0]["period"]
-            ratios = compute_ratios(result.info)
+            ratios = compute_ratios(
+                result.info,
+                result.quarterly_financials,
+                result.quarterly_balance_sheet,
+                result.quarterly_cashflow,
+            )
             upsert_ratios(db, company_id, latest_period, ratios)
 
             # 5. Growth metrics
