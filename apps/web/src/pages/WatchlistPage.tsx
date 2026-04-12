@@ -270,7 +270,7 @@ export function WatchlistPage() {
         userId: user?.id ?? 'dev-user',
         pageLabel: 'Watchlist',
         filters: { market: 'ALL', strategy: 'ALL', sector: 'ALL' },
-        filename: `alphascreen-watchlist-${new Date().toISOString().slice(0, 10)}.xlsx`,
+        filename: `slist-watchlist-${new Date().toISOString().slice(0, 10)}.xlsx`,
       })
     } catch (e) { console.error(e) }
     finally { setExporting(false) }

@@ -50,10 +50,10 @@ export interface ExportParams {
 export async function exportShortlistExcel(params: ExportParams): Promise<void> {
   const { rows, defs, settings, userId, filename } = params
 
-  // Enabled criteria in canonical order
-  const enabledIds = DEFAULT_DASHBOARD_COLS.filter(
-    id => settings.criteria[id]?.enabled === true,
-  )
+  // Enabled criteria in canonical order — use all defs, not just dashboard cols
+  const enabledIds = defs
+    .map(d => d.id)
+    .filter(id => settings.criteria[id]?.enabled === true)
 
   // Growth / value split for pass columns
   const enabledGrowthIds = enabledIds.filter(id => defs.find(d => d.id === id)?.preset === 'growth')
@@ -77,7 +77,7 @@ export async function exportShortlistExcel(params: ExportParams): Promise<void> 
   enabledIds.forEach((id, i) => { criterionRowMap[id] = 6 + i })
 
   const wb = new ExcelJS.Workbook()
-  wb.creator = 'Alphascreen'
+  wb.creator = 'SLIST'
   wb.created = new Date()
 
   buildConfigSheet(wb, enabledIds, defs, settings, criterionRowMap,
@@ -126,7 +126,7 @@ function buildConfigSheet(
 
   ws.mergeCells('A1:E1')
   const titleCell = ws.getCell('A1')
-  titleCell.value = 'Alphascreen — Screening Config'
+  titleCell.value = 'SLIST — Screening Config'
   titleCell.font  = { bold: true, size: 13 }
 
   ws.addRow([])

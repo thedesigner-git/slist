@@ -78,7 +78,7 @@ async def lifespan(app: FastAPI):
     scheduler.shutdown()
 
 
-app = FastAPI(title="Alphascreen API", lifespan=lifespan)
+app = FastAPI(title="SLIST API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -107,4 +107,4 @@ app.include_router(companies.router)
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "service": "alphascreen-api"}
+    return {"status": "ok", "service": "slist-api"}

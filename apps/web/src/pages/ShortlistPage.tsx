@@ -438,7 +438,7 @@ export function ShortlistPage() {
         userId: user?.id ?? 'dev-user',
         pageLabel: 'Shortlist',
         filters: { market, strategy, sector },
-        filename: `alphascreen-shortlist-${new Date().toISOString().slice(0, 10)}.xlsx`,
+        filename: `slist-shortlist-${new Date().toISOString().slice(0, 10)}.xlsx`,
       })
     } catch (e) { console.error(e) }
     finally { setExporting(false) }
