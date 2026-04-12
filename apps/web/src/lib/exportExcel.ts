@@ -1,6 +1,6 @@
 import ExcelJS from 'exceljs'
 import { api } from './api'
-import { COLUMN_MAP, DEFAULT_DASHBOARD_COLS } from './criteriaMap'
+import { COLUMN_MAP } from './criteriaMap'
 import type { ShortlistRow, CriterionDef, CriteriaSettings, Filing } from './types'
 
 // ── helpers ───────────────────────────────────────────────────────────────────

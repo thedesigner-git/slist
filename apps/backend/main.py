@@ -1,3 +1,4 @@
+import json
 import os
 from contextlib import asynccontextmanager
 
@@ -10,6 +11,7 @@ from fastapi.responses import Response
 from sqlalchemy import text
 
 from agent.runner import run_all
+from criteria_defs import build_default_settings
 from db import engine, Base
 import models  # noqa: F401 — registers all ORM models with Base
 from routers import agent as agent_router
@@ -36,16 +38,21 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         print(f"WARNING: Table creation skipped — DB not reachable: {e}")
 
-    # Migration: align existing users to updated default thresholds
+    # Migration: reset criteria JSONB to full defaults for any user with incomplete settings
     try:
+        defaults = build_default_settings()
+        criteria_json = json.dumps(defaults["criteria"])
         with engine.connect() as conn:
-            conn.execute(text(
-                "UPDATE user_criteria_settings "
-                "SET growth_pass_threshold = 3 WHERE growth_pass_threshold = 4"
-            ))
+            conn.execute(text("""
+                UPDATE user_criteria_settings
+                SET criteria = :c::jsonb,
+                    growth_pass_threshold = 3,
+                    value_pass_threshold = 3
+                WHERE (SELECT count(*) FROM jsonb_each(COALESCE(criteria, '{}'::jsonb))) < 20
+            """), {"c": criteria_json})
             conn.commit()
     except Exception as e:
-        print(f"WARNING: Threshold migration skipped: {e}")
+        print(f"WARNING: Criteria reset migration skipped: {e}")
 
     # Safe migration: add per-preset criteria count columns if not present
     try:
