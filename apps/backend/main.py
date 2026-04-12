@@ -10,7 +10,8 @@ from fastapi.responses import Response
 from sqlalchemy import text
 
 from agent.runner import run_all
-from db import engine
+from db import engine, Base
+import models  # noqa: F401 — registers all ORM models with Base
 from routers import agent as agent_router
 from routers import companies, criteria, users
 
@@ -29,6 +30,12 @@ for _url in os.environ.get("PRODUCTION_URL", "").split(","):
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # Create all tables if they don't exist (safe on existing DBs)
+    try:
+        Base.metadata.create_all(engine)
+    except Exception as e:
+        print(f"WARNING: Table creation skipped — DB not reachable: {e}")
+
     # Safe migration: add per-preset criteria count columns if not present
     try:
         with engine.connect() as conn:
