@@ -56,12 +56,10 @@ export const CRITERION_DESCRIPTIONS: Record<string, string> = {
   priceFCF:            'How much are you paying for each $1 of free cash flow generated? A P/FCF below 25× is generally considered a reasonable valuation.',
 }
 
-/** All 20 metrics shown in the table */
+/** Default 7 dashboard columns shown to first-time users (4 Growth + 3 Value) */
 export const DEFAULT_DASHBOARD_COLS = [
-  // Growth
-  'revenueGrowth', 'epsGrowth', 'roe', 'grossMargin', 'operatingMargin',
-  'fcfGrowth', 'netProfitMargin', 'rdPercent', 'earningsConsistency', 'peRelative',
-  // Value
-  'peLtMarket', 'pb', 'fcfPositive', 'debtEquity', 'evEbitda',
-  'dividendYield', 'priceToSales', 'currentRatio', 'interestCoverage', 'priceFCF',
+  // Growth — top 4 most informative
+  'revenueGrowth', 'epsGrowth', 'roe', 'operatingMargin',
+  // Value — top 3 most informative
+  'peLtMarket', 'evEbitda', 'debtEquity',
 ]

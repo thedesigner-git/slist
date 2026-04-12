@@ -67,7 +67,7 @@ def build_default_settings() -> dict:
     return {
         "growth_enabled": True,
         "value_enabled": True,
-        "growth_pass_threshold": 4,
+        "growth_pass_threshold": 3,
         "value_pass_threshold": 3,
         "shortlist_threshold": 0.70,
         "criteria": {

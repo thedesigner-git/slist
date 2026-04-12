@@ -36,6 +36,17 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         print(f"WARNING: Table creation skipped — DB not reachable: {e}")
 
+    # Migration: align existing users to updated default thresholds
+    try:
+        with engine.connect() as conn:
+            conn.execute(text(
+                "UPDATE user_criteria_settings "
+                "SET growth_pass_threshold = 3 WHERE growth_pass_threshold = 4"
+            ))
+            conn.commit()
+    except Exception as e:
+        print(f"WARNING: Threshold migration skipped: {e}")
+
     # Safe migration: add per-preset criteria count columns if not present
     try:
         with engine.connect() as conn:
