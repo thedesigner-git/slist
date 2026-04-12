@@ -21,9 +21,10 @@ _ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
 ]
-_PRODUCTION_URL = os.environ.get("PRODUCTION_URL")
-if _PRODUCTION_URL:
-    _ALLOWED_ORIGINS.append(_PRODUCTION_URL)
+for _url in os.environ.get("PRODUCTION_URL", "").split(","):
+    _url = _url.strip()
+    if _url:
+        _ALLOWED_ORIGINS.append(_url)
 
 
 @asynccontextmanager
