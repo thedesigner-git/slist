@@ -64,8 +64,8 @@ app = FastAPI(title="Alphascreen API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=_ALLOWED_ORIGINS,
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
     allow_headers=["Authorization", "Content-Type"],
 )
