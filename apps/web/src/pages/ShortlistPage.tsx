@@ -427,7 +427,7 @@ export function ShortlistPage() {
   }, [settings, pollAndRefresh])
 
   const handleExport = useCallback(async () => {
-    if (!settings || !defs.length || !user) return
+    if (!settings || !defs.length) return
     setExporting(true)
     try {
       const { exportShortlistExcel } = await import('@/lib/exportExcel')
@@ -435,7 +435,7 @@ export function ShortlistPage() {
         rows,
         defs,
         settings,
-        userId: user.id,
+        userId: user?.id ?? 'dev-user',
         pageLabel: 'Shortlist',
         filters: { market, strategy, sector },
         filename: `alphascreen-shortlist-${new Date().toISOString().slice(0, 10)}.xlsx`,

@@ -259,7 +259,7 @@ export function WatchlistPage() {
   }
 
   const handleExport = useCallback(async () => {
-    if (!settings || !defs.length || !user) return
+    if (!settings || !defs.length) return
     setExporting(true)
     try {
       const { exportShortlistExcel } = await import('@/lib/exportExcel')
@@ -267,7 +267,7 @@ export function WatchlistPage() {
         rows: watched,
         defs,
         settings,
-        userId: user.id,
+        userId: user?.id ?? 'dev-user',
         pageLabel: 'Watchlist',
         filters: { market: 'ALL', strategy: 'ALL', sector: 'ALL' },
         filename: `alphascreen-watchlist-${new Date().toISOString().slice(0, 10)}.xlsx`,
