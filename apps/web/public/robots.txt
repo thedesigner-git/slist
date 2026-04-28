@@ -1,5 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
 
-# Alphascreen is a private authenticated application.
-# There is no public content to index.
+Sitemap: https://slist.eu/sitemap.xml
